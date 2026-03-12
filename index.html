@@ -3459,25 +3459,25 @@
     <div class="kpi">
       <div class="kpi-accent" style="background:var(--ob-yellow)"></div>
       <div class="kpi-label">Oscilação Média</div>
-      <div class="kpi-val" style="color:#b45309">−4.2%</div>
+      <div class="kpi-val" id="kpi-oscilacao" style="color:#b45309">−4.2%</div>
       <div class="kpi-foot"><span class="chip chip-a">▼ meta −2%</span> últimos 30 dias</div>
     </div>
     <div class="kpi">
       <div class="kpi-accent" style="background:#ef4444"></div>
       <div class="kpi-label">Hotéis em Alerta</div>
-      <div class="kpi-val" style="color:#b91c1c">38</div>
+      <div class="kpi-val" id="kpi-alertas" style="color:#b91c1c">38</div>
       <div class="kpi-foot"><span class="chip chip-r">▲ +6 semana</span> queda &gt;8%</div>
     </div>
     <div class="kpi">
       <div class="kpi-accent" style="background:#1a7a4a"></div>
       <div class="kpi-label">Acurácia do Modelo</div>
-      <div class="kpi-val" style="color:#15803d">87%</div>
+      <div class="kpi-val" id="kpi-acuracia" style="color:#15803d">87%</div>
       <div class="kpi-foot"><span class="chip chip-g">▲ +3pp</span> vs. trimestre anterior</div>
     </div>
     <div class="kpi">
       <div class="kpi-accent" style="background:var(--ob-purple)"></div>
       <div class="kpi-label">Revisões Pendentes</div>
-      <div class="kpi-val" style="color:#1d4ed8">14</div>
+      <div class="kpi-val" id="kpi-revisoes" style="color:#1d4ed8">14</div>
       <div class="kpi-foot"><span class="chip chip-a">⏳ SLA 48h</span> aguardando ação</div>
     </div>
   </div>
@@ -5566,25 +5566,25 @@ Usuário Comum: Visualização · 📥 Exportar CSV</div>
   <div class="ci-hero">
     <div class="ci-kpi" style="border-top-color:var(--ob-purple)">
       <div class="ci-kpi-label">Check-ins Jan/26 — Real</div>
-      <div class="ci-kpi-val">1.290.701</div>
+      <div class="ci-kpi-val" id="ci-h-jan-total">1.290.701</div>
       <div class="ci-kpi-sub">meta: 1.303.993 · ating. 98,98%</div>
       <div class="ci-kpi-delta" style="color:var(--green)">▲ +6,7% YoY vs Jan/25</div>
     </div>
     <div class="ci-kpi" style="border-top-color:#1d4ed8">
       <div class="ci-kpi-label">Channel Manager / OTAs — Jan/26</div>
-      <div class="ci-kpi-val">797.932</div>
+      <div class="ci-kpi-val" id="ci-h-channel-jan">797.932</div>
       <div class="ci-kpi-sub">61,8% do total · maior canal</div>
       <div class="ci-kpi-delta" style="color:var(--green)">▲ +6,0% YoY</div>
     </div>
     <div class="ci-kpi" style="border-top-color:var(--ob-purple)">
       <div class="ci-kpi-label">Motor de Reservas — Jan/26</div>
-      <div class="ci-kpi-val">134.148</div>
+      <div class="ci-kpi-val" id="ci-h-motor-jan">134.148</div>
       <div class="ci-kpi-sub">10,4% do total</div>
       <div class="ci-kpi-delta" style="color:var(--green)">▲ +5,4% YoY</div>
     </div>
     <div class="ci-kpi" style="border-top-color:var(--amber)">
       <div class="ci-kpi-label">Fev/26 — Real</div>
-      <div class="ci-kpi-val">1.131.385</div>
+      <div class="ci-kpi-val" id="ci-h-fev-total">1.131.385</div>
       <div class="ci-kpi-sub">meta: 1.178.591 · ating. 96,0%</div>
       <div class="ci-kpi-delta" style="color:var(--green)">▲ +6,5% YoY vs Fev/25</div>
     </div>
@@ -5903,11 +5903,31 @@ Usuário Comum: Visualização · 📥 Exportar CSV</div>
       <div class="dados-selector-wrap">
         <span class="dados-selector-lbl">Categoria</span>
         <select class="dados-select" id="dtCatSel" onchange="dtRender(this.value)">
-          <option value="checkins">📅 Check-ins</option>
-          <option value="operadoras">🌐 Operadoras</option>
-          <option value="canais">🔄 Canais</option>
-          <option value="hotel">🏨 Hotel</option>
-          <option value="corporativo">🏢 Corporativo</option>
+          <optgroup label="📅 Check-ins &amp; Distribuição">
+            <option value="checkins">📅 Check-ins Mensais</option>
+            <option value="operadoras">🌐 Operadoras</option>
+            <option value="canais">🔄 Canais</option>
+          </optgroup>
+          <optgroup label="🏨 Portfólio">
+            <option value="hotel">🏨 Hotéis</option>
+            <option value="corporativo">🏢 Corporativo</option>
+          </optgroup>
+          <optgroup label="📊 Performance &amp; Saúde">
+            <option value="kpis">📊 KPIs Dashboard</option>
+            <option value="areas">🏢 Score por Área</option>
+            <option value="ota_saude">💊 Saúde por OTA</option>
+            <option value="atendimento">🎧 Atendimento SLA</option>
+          </optgroup>
+          <optgroup label="📦 Dados Operacionais">
+            <option value="metas">📋 Metas por Produto</option>
+            <option value="simulador">🎛️ Simulador Alavancas</option>
+            <option value="dashboard_osc">📊 Oscilação Dashboard</option>
+            <option value="performance">🏆 Performance Hotéis</option>
+          </optgroup>
+          <optgroup label="🎯 Estratégia">
+            <option value="okrs">🎯 OKRs &amp; KRs</option>
+            <option value="res_score">🏆 Revenue Engine Score</option>
+          </optgroup>
         </select>
       </div>
 
@@ -5958,6 +5978,55 @@ Usuário Comum: Visualização · 📥 Exportar CSV</div>
       </div>
     </div>
 
+  </div>
+
+
+  <!-- ARCHITECTURE DOC -->
+  <div class="card" style="margin-top:20px">
+    <div class="card-hd" style="cursor:pointer" onclick="dtToggleArch()">
+      <div>
+        <div class="card-title">🏗️ Arquitetura de Dados — Mapeamento Completo</div>
+        <div class="card-sub">Origem, cálculo e destino de cada indicador · clique para expandir</div>
+      </div>
+      <span id="dtArchChevron" style="font-size:18px;color:var(--ob-purple)">▾</span>
+    </div>
+    <div id="dtArchBody" style="display:none">
+      <div class="card-body" style="padding:20px">
+        <div style="background:var(--ob-purple-dk);border-radius:12px;padding:16px 20px;margin-bottom:20px;color:#fff">
+          <div style="font-size:12px;font-weight:700;font-family:var(--font-mono);color:var(--ob-yellow);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Fluxo Central de Dados</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:11px;font-family:var(--font-mono)">
+            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px">
+              <div style="color:var(--ob-yellow);font-weight:700;margin-bottom:6px">📥 FONTES</div>
+              <div style="opacity:.8;line-height:1.8">PMS / ERP Hoteleiro<br>CRM (Salesforce)<br>OTAs via extranet<br>Checkin.xlsx (upload)<br>Pesquisa NPS/CSAT<br>Inputs manuais</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px">
+              <div style="color:var(--ob-yellow);font-weight:700;margin-bottom:6px">🗃️ DT_STORE (Central)</div>
+              <div style="opacity:.8;line-height:1.8">checkins · operadoras<br>canais · hotel<br>corporativo · areas<br>ota_saude · kpis<br>atendimento · okrs<br>res_score</div>
+            </div>
+            <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:10px">
+              <div style="color:var(--ob-yellow);font-weight:700;margin-bottom:6px">📊 ABAS (Destino)</div>
+              <div style="opacity:.8;line-height:1.8">⚙️ Motor RevOps<br>📊 Dashboard<br>🔮 Predição<br>📅 Check-ins<br>🎯 OKRs · 📋 Metas<br>🎧 Atendimento<br>🏆 Rev. Engine</div>
+            </div>
+          </div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead>
+            <tr style="background:var(--ob-purple-lt)">
+              <th style="padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple-dk);text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid var(--border)">Tabela</th>
+              <th style="padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple-dk);text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid var(--border)">Colunas-chave</th>
+              <th style="padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple-dk);text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid var(--border)">Abas alimentadas</th>
+              <th style="padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple-dk);text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid var(--border)">Cálculo</th>
+              <th style="padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple-dk);text-transform:uppercase;letter-spacing:.7px;border-bottom:2px solid var(--border)">Origem</th>
+            </tr>
+          </thead>
+          <tbody id="dtArchTableBody"></tbody>
+        </table>
+        <div style="margin-top:16px;background:var(--ob-yellow-lt);border-radius:9px;padding:12px 16px;border-left:4px solid var(--ob-yellow)">
+          <div style="font-size:11px;font-weight:700;color:var(--ob-purple-dk);margin-bottom:4px">⚡ Como funciona a amarração em tempo real</div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--ink2);line-height:1.7">1. Edite qualquer célula na tabela · 2. Clique em <strong>Salvar</strong> · 3. <code>refreshAllTabs()</code> é acionado automaticamente · 4. Todos os componentes lêem de <code>DT_STORE</code> e se atualizam · 5. Dados em memória na sessão — importe um XLSX para persistir.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="dados-toast" id="dadosToast"></div>
@@ -6068,6 +6137,7 @@ Usuário Comum: Visualização · 📥 Exportar CSV</div>
 <script>
 // ── TABS
 function go(id, btn) {
+  if(typeof syncTabToDT==='function')syncTabToDT();
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   document.getElementById('p-' + id).classList.add('active');
@@ -7207,6 +7277,10 @@ const USERS = [
   { user: 'teste', pass: 'teste', name: 'Usuário Teste', role: 'RevOps Analyst' },
   { user: 'admin', pass: 'admin2026', name: 'Administrador', role: 'RevOps Lead' },
 ];
+
+window.addEventListener("load", function() {
+  if(typeof centralInit==="function") centralInit();
+});
 
 function doLogin() {
   const userVal = document.getElementById('login-user').value.trim();
@@ -9691,6 +9765,16 @@ var DT_SCHEMAS = {
   operadoras: ['Operadora', 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez', 'Total'],
   canais:     ['Canal', 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez', 'Total'],
   hotel:      ['Hotel', 'Cidade', 'UF', 'Categoria', 'Quartos', 'ADR (R$)', 'Ocupação (%)', 'MRR (R$)', 'Check-ins YTD', 'Observação'],
+  areas:      ['Área', 'Score (0-100)', 'Status', 'Dim 1 Label', 'Dim 1 Valor', 'Dim 2 Label', 'Dim 2 Valor', 'Dim 3 Label', 'Dim 3 Valor', 'Dim 4 Label', 'Dim 4 Valor'],
+  ota_saude:  ['Operadora', 'Score (0-100)', 'Status', 'Paridade', 'Conteúdo', 'Conversão', 'Pickup'],
+  kpis:       ['Indicador', 'Valor', 'Meta', 'Variação (%)', 'Período', 'Fonte'],
+  atendimento:['Fila', 'Abertos', 'Fechados', 'SLA Cumprido (%)', 'CSAT', 'FRT (h)', 'Backlog', 'Agente Destaque'],
+  okrs:       ['Área', 'Seção', 'KR', 'Descrição', 'Meta', 'Realizado (%)', 'Status', 'Observação'],
+  res_score:  ['Pilar', 'Peso (%)', 'Slider 1 Label', 'Slider 1 Valor', 'Slider 2 Label', 'Slider 2 Valor', 'Score Calculado'],
+  metas:       ['Produto', 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez', 'YTD', 'Formato'],
+  simulador:   ['Alavanca', 'Valor Base', 'Mín', 'Máx', 'Step', 'Unidade'],
+  dashboard_osc:['Mês', 'Oscilação Real (%)', 'Predição (%)', 'Período'],
+  performance: ['Hotel', 'Região', 'Stars', 'Quartos', 'Diária (R$)', 'Ocupação (%)', 'MRR (R$)', 'Adimplência (%)', 'Badge'],
   corporativo:['Empresa', 'Segmento', 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez', 'Total']
 };
 
@@ -9699,15 +9783,312 @@ var DT_LABELS = {
   operadoras: '🌐 Operadoras',
   canais:     '🔄 Canais',
   hotel:      '🏨 Hotel',
-  corporativo:'🏢 Corporativo'
+  corporativo:'🏢 Corporativo',
+  areas:      '🏢 Score por Área',
+  ota_saude:  '💊 Saúde OTA',
+  kpis:       '📊 KPIs Dashboard',
+  atendimento:'🎧 Atendimento',
+  okrs:       '🎯 OKRs & KRs',
+  res_score:  '🏆 Revenue Engine',
+  metas:       '📋 Metas por Produto',
+  simulador:   '🎛️ Simulador Alavancas',
+  dashboard_osc:'📊 Oscilação Dashboard',
+  performance: '🏆 Performance Hotéis'
 };
 
 // In-memory data store: { category: [[row], [row], ...] }
-var DT_STORE = { checkins:[], operadoras:[], canais:[], hotel:[], corporativo:[] };
+var DT_STORE = { checkins:[], operadoras:[], canais:[], hotel:[], corporativo:[],
+  areas:[], ota_saude:[], kpis:[], atendimento:[], okrs:[], res_score:[],
+  metas:[], simulador:[], dashboard_osc:[], performance:[] };
 var DT_DIRTY = {};  // category -> bool
 var DT_CURRENT = 'checkins';
 
 // ── INIT / render ─────────────────────────────────────────────
+
+// ══ CENTRAL DATA ══════════════════════════════════════════════
+function labelFromScore(s){return s>=80?'Saudável':s>=65?'Bom':s>=50?'Atenção':s>=35?'Risco':'Crítico';}
+
+function centralInit(){
+  if(!DT_STORE.areas||!DT_STORE.areas.length){
+    DT_STORE.areas=areaData.map(function(a){
+      return[a.op,a.score,a.label,
+        a.dims[0]?a.dims[0].l:'',a.dims[0]?a.dims[0].v:0,
+        a.dims[1]?a.dims[1].l:'',a.dims[1]?a.dims[1].v:0,
+        a.dims[2]?a.dims[2].l:'',a.dims[2]?a.dims[2].v:0,
+        a.dims[3]?a.dims[3].l:'',a.dims[3]?a.dims[3].v:0];
+    });
+  }
+  if(!DT_STORE.ota_saude||!DT_STORE.ota_saude.length){
+    DT_STORE.ota_saude=healthData.map(function(h){
+      return[h.op,h.score,h.label,
+        h.dims[0]?h.dims[0].v:0,h.dims[1]?h.dims[1].v:0,
+        h.dims[2]?h.dims[2].v:0,h.dims[3]?h.dims[3].v:0];
+    });
+  }
+  if(!DT_STORE.kpis||!DT_STORE.kpis.length){
+    DT_STORE.kpis=[
+      ['Check-ins Jan/26','1.290.701','1.303.993','-1,0%','Jan/26','Linha_do_tempo_Checkin.xlsx'],
+      ['Check-ins Fev/26','1.131.385','1.178.591','-4,0%','Fev/26','Linha_do_tempo_Checkin.xlsx'],
+      ['Check-ins Mar/26','780.324','1.256.184','-37,9%','Mar/26 parcial','Linha_do_tempo_Checkin.xlsx'],
+      ['YTD Check-ins 2026','3.202.410','3.738.768','-14,3%','YTD Mar/26','Calculado'],
+      ['ADR médio 2025','R$ 633,66','R$ 650,00','-2,5%','2025','ERP Hoteleiro'],
+      ['Ocupação média','71%','74%','-3pp','Fev/26','PMS Rede'],
+      ['NRR','103%','110%','-7pp','Fev/26','CS Dashboard'],
+      ['Win Rate','25%','30%','-5pp','Fev/26','CRM'],
+      ['Churn Mensal','1,2%','0,8%','+0,4pp','Fev/26','CS Dashboard'],
+      ['NPS','34','50','-16pts','Q1/26','Pesquisa CS'],
+    ];
+  }
+  if(!DT_STORE.checkins||!DT_STORE.checkins.length){
+    var meses=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    var metas=[1303993,1178591,1256184,1212726,1268399,1240955,1347219,1337705,1350176,1394080,1405784,1367143];
+    var reals=[1290701,1131385,780324,'','','','','','','','',''];
+    var yoy=[6.7,6.5,-33.6,'','','','','','','','',''];
+    var mom=['','-12.4','-31.0','','','','','','','','',''];
+    DT_STORE.checkins=meses.map(function(m,i){
+      return[m,'2026',reals[i],metas[i],yoy[i]!==''?yoy[i]+'%':'',mom[i]!==''?mom[i]+'%':'',i<3?'Dado real':'Projetado'];
+    });
+  }
+  if(!DT_STORE.operadoras||!DT_STORE.operadoras.length){
+    DT_STORE.operadoras=[
+      ['Booking.com',1513318,'','','','','','','','','','','',1513318],
+      ['Expedia',482854,'','','','','','','','','','','',482854],
+      ['Booking Engine',475871,'','','','','','','','','','','',475871],
+      ['Despegar-PAM',332209,'','','','','','','','','','','',332209],
+      ['Hotelbeds',137285,'','','','','','','','','','','',137285],
+      ['CVC Corp',98420,'','','','','','','','','','','',98420],
+      ['Decolar',87312,'','','','','','','','','','','',87312],
+      ['HRS',45180,'','','','','','','','','','','',45180],
+    ];
+  }
+  if(!DT_STORE.hotel||!DT_STORE.hotel.length){
+    DT_STORE.hotel=Object.keys(PFH).map(function(k){
+      var h=PFH[k];
+      var parts=h.region.split('·');
+      return[h.name,parts[1]?parts[1].trim():'',parts[0].trim(),h.stars+'★',h.q,h.d,h.occ,h.mrr,'',''];
+    });
+  }
+  if(!DT_STORE.atendimento||!DT_STORE.atendimento.length){
+    DT_STORE.atendimento=[
+      ['Suporte Técnico',24,18,91,4.2,2.1,6,'Ana Lopes'],
+      ['Onboarding',12,11,95,4.6,1.4,1,'Bruno Sá'],
+      ['Financeiro',8,7,88,4.1,3.2,1,'Carla Melo'],
+      ['CS Estratégico',15,13,87,4.4,2.8,2,'Diego Faria'],
+      ['Comercial',19,14,74,3.8,4.5,5,'Eva Costa'],
+      ['Implantação',11,10,93,4.5,1.8,1,'Felipe Ramos'],
+    ];
+  }
+  if(!DT_STORE.okrs||!DT_STORE.okrs.length){
+    DT_STORE.okrs=[
+      ['CS','Key Results','KR 1','Receita basal R$ 176.978.963','R$ 176.978.963',28,'Em progresso',''],
+      ['CS','Key Results','KR 2','Crescer check-ins Central +30%','643.449 check-ins',22,'Em progresso',''],
+      ['CS','Key Results','KR 3','Crescer check-ins Corporativo +104%','956.104 check-ins',18,'Em progresso',''],
+      ['CS','Key Results','KR 4','80% clientes Berçário com reservas min','80% clientes',31,'Em progresso',''],
+      ['Expansão','Pré-Vendas','KR 1','Giro de carteira 13%','13% giro',25,'Em progresso',''],
+      ['Expansão','Pré-Vendas','KR 2','765 reuniões realizadas','765 reuniões',20,'Em progresso',''],
+      ['Expansão','Field Sales','KR 1','Vender 537 produtos','537 produtos',18,'Em progresso',''],
+      ['Expansão','Field Sales','KR 2','R$ 239.575 receita preditora','R$ 239.575',24,'Em progresso',''],
+      ['Implantação','BeeDirect','KR 1','23% implantado em M0','23% em M0',27,'Em progresso',''],
+      ['Implantação','BeeDirect','KR 2','70% implantado em M1','70% em M1',22,'Em progresso',''],
+      ['Marketing','Inbound','KR 1','4.000 hotéis não conhecidos descobertos','4.000 hotéis',15,'Em progresso',''],
+      ['Aquisição','Key Results','KR 1','171 novos hotéis','171 hotéis',19,'Em progresso',''],
+    ];
+  }
+
+  // ── metas ──────────────────────────────────────────────────
+  if(!DT_STORE.metas||!DT_STORE.metas.length){
+    DT_STORE.metas=MT_DATA.map(function(r){
+      return[r.label].concat(r.vals.slice()).concat([r.ytd,r.fmt]);
+    });
+  }
+  // ── simulador ──────────────────────────────────────────────
+  if(!DT_STORE.simulador||!DT_STORE.simulador.length){
+    DT_STORE.simulador=ALAVANCAS.map(function(a){
+      return[a.label,a.base,a.min,a.max,a.step,a.unit||''];
+    });
+  }
+  // ── dashboard_osc ──────────────────────────────────────────
+  if(!DT_STORE.dashboard_osc||!DT_STORE.dashboard_osc.length){
+    var _dm=['Out','Nov','Dez','Jan','Fev','Mar'];
+    var _dr=[-2.1,-3.4,-1.8,-5.2,-4.8,-4.2];
+    var _dp=[-2.5,-3.0,-2.1,-4.8,-5.1,-4.9];
+    DT_STORE.dashboard_osc=_dm.map(function(m,i){return[m,_dr[i],_dp[i],'Últ. 6 meses'];});
+  }
+  // ── performance ────────────────────────────────────────────
+  if(!DT_STORE.performance||!DT_STORE.performance.length){
+    DT_STORE.performance=Object.keys(PFH).map(function(k){
+      var h=PFH[k], parts=h.region.split('·');
+      return[h.name,parts[0].trim(),h.stars,h.q,h.d,h.occ,h.mrr,h.adm,h.bdg||''];
+    });
+  }
+  if(!DT_STORE.res_score||!DT_STORE.res_score.length){
+    DT_STORE.res_score=Object.keys(RES_DEFAULTS).map(function(k){
+      var d=RES_DEFAULTS[k];
+      var st=RES_STATE[k]||{};
+      var s0=d.sliders[0]||{}, s1=d.sliders[1]||{};
+      return[d.label,d.peso,s0.l||'',st[s0.k]!==undefined?st[s0.k]:s0.v,
+        s1.l||'',st[s1.k]!==undefined?st[s1.k]:s1.v,d.score];
+    });
+  }
+}
+
+function refreshAllTabs(){
+  // 1. AREAS
+  if(DT_STORE.areas&&DT_STORE.areas.length){
+    var newAD=DT_STORE.areas.map(function(r){
+      var sc=parseInt(r[1])||0,col=sc>=80?'#1a7a4a':sc>=65?'#5c1085':sc>=50?'#c49a12':'#c0173a',lc=sc>=80?'var(--green)':sc>=65?'var(--ob-purple)':sc>=50?'var(--amber)':'var(--red)';
+      return{op:r[0],score:sc,label:r[2]||labelFromScore(sc),color:col,labelColor:lc,dims:[{l:r[3]||'Dim1',v:parseInt(r[4])||0},{l:r[5]||'Dim2',v:parseInt(r[6])||0},{l:r[7]||'Dim3',v:parseInt(r[8])||0},{l:r[9]||'Dim4',v:parseInt(r[10])||0}]};
+    });
+    var elA=document.getElementById('areaHealthGrid');
+    if(elA){elA.innerHTML='';newAD.forEach(function(h){
+      var c2=Math.PI*2*20,off=c2-(h.score/100)*c2,card=document.createElement('div');card.className='health-card';
+      card.innerHTML='<div class="health-op">'+h.op+'<div class="area-info-btn">i'+renderAreaTooltip(h.op)+'</div></div><div class="health-score-wrap"><div class="health-score-ring"><svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="#f0f0ec" stroke-width="5"/><circle cx="24" cy="24" r="20" fill="none" stroke="'+h.color+'" stroke-width="5" stroke-dasharray="'+c2.toFixed(2)+'" stroke-dashoffset="'+off.toFixed(2)+'" stroke-linecap="round" transform="rotate(-90,24,24)"/></svg><div class="health-score-num" style="color:'+h.labelColor+'">'+h.score+'</div></div><div><div class="health-label" style="color:'+h.labelColor+'">'+h.label+'</div><div class="health-sublabel">score de área</div></div></div><div class="health-dims">'+h.dims.map(function(d){return'<div class="health-dim"><span class="health-dim-lbl">'+d.l+'</span><div class="health-dim-bar"><div class="health-dim-fill" style="width:'+d.v+'%;background:'+h.color+'88"></div></div><span class="health-dim-val">'+d.v+'</span></div>';}).join('')+'</div>';
+      elA.appendChild(card);
+    });}
+  }
+  // 2. OTA SAÚDE
+  if(DT_STORE.ota_saude&&DT_STORE.ota_saude.length){
+    var newHD=DT_STORE.ota_saude.map(function(r){
+      var sc=parseInt(r[1])||0,col=sc>=80?'#16a34a':sc>=65?'#5c1085':sc>=50?'#d97706':'#dc2626',lc=sc>=80?'var(--green)':sc>=65?'var(--ob-purple)':sc>=50?'var(--amber)':'var(--red)';
+      return{op:r[0],score:sc,label:r[2]||labelFromScore(sc),color:col,labelColor:lc,dims:[{l:'Paridade',v:parseInt(r[3])||0},{l:'Conteúdo',v:parseInt(r[4])||0},{l:'Conversão',v:parseInt(r[5])||0},{l:'Pickup',v:parseInt(r[6])||0}]};
+    });
+    var hEl=document.getElementById('healthGrid');
+    if(hEl){hEl.innerHTML='';newHD.forEach(function(h){
+      var c2=Math.PI*2*20,off=c2-(h.score/100)*c2,card=document.createElement('div');card.className='health-card';
+      card.innerHTML='<div class="health-op">'+h.op+'</div><div class="health-score-wrap"><div class="health-score-ring"><svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="#f0f0ec" stroke-width="5"/><circle cx="24" cy="24" r="20" fill="none" stroke="'+h.color+'" stroke-width="5" stroke-dasharray="'+c2.toFixed(2)+'" stroke-dashoffset="'+off.toFixed(2)+'" stroke-linecap="round" transform="rotate(-90,24,24)"/></svg><div class="health-score-num" style="color:'+h.labelColor+'">'+h.score+'</div></div><div><div class="health-label" style="color:'+h.labelColor+'">'+h.label+'</div><div class="health-sublabel">score de saúde</div></div></div><div class="health-dims">'+h.dims.map(function(d){return'<div class="health-dim"><span class="health-dim-lbl">'+d.l+'</span><div class="health-dim-bar"><div class="health-dim-fill" style="width:'+d.v+'%;background:'+h.color+'88"></div></div><span class="health-dim-val">'+d.v+'</span></div>';}).join('')+'</div>';
+      hEl.appendChild(card);
+    });}
+  }
+  // 3. DASHBOARD — oscilação chart + KPI strip
+  if(DT_STORE.dashboard_osc&&DT_STORE.dashboard_osc.length){
+    var bc=document.getElementById('barChart'),bl=document.getElementById('barLabels');
+    if(bc&&bl){
+      var oscD=DT_STORE.dashboard_osc,maxV2=oscD.reduce(function(a,r){return Math.max(a,Math.abs(parseFloat(r[1])||0),Math.abs(parseFloat(r[2])||0));},1);
+      bc.innerHTML='';bl.innerHTML='';
+      oscD.forEach(function(r){
+        var rv=parseFloat(r[1])||0,pv=parseFloat(r[2])||0,rh=Math.abs(rv)/maxV2*100,ph=Math.abs(pv)/maxV2*100;
+        var col=rv<-8?'#fca5a5':rv<-4?'#fde68a':'#93c5fd';
+        var grp=document.createElement('div');grp.className='bar-col';
+        grp.innerHTML='<div style="display:flex;gap:3px;align-items:flex-end;height:100px"><div style="width:16px;height:'+rh+'%;background:'+col+';border-radius:3px 3px 0 0;min-height:4px"></div><div style="width:16px;height:'+ph+'%;background:#d1d5db;border-radius:3px 3px 0 0;min-height:4px"></div></div><div style="font-size:10px;text-align:center;margin-top:3px;font-family:var(--font-mono);color:'+col+'">'+rv.toFixed(1)+'%</div>';
+        bc.appendChild(grp);
+        var lbl=document.createElement('div');lbl.style.cssText='font-size:10px;font-family:var(--font-mono);color:var(--ink3);min-width:36px;text-align:center';lbl.textContent=r[0];bl.appendChild(lbl);
+      });
+      var oscEl=document.getElementById('kpi-oscilacao');
+      if(oscEl){var avg2=oscD.reduce(function(a,r){return a+(parseFloat(r[1])||0);},0)/oscD.length;oscEl.textContent=(avg2>=0?'+':'')+avg2.toFixed(1)+'%';}
+    }
+  }
+  if(DT_STORE.kpis&&DT_STORE.kpis.length){
+    var alRow=DT_STORE.kpis.find(function(r){return/alerta/i.test(String(r[0]));});
+    var alEl=document.getElementById('kpi-alertas');if(alEl&&alRow)alEl.textContent=alRow[1];
+  }
+  // 4. CHECK-INS heroes + PB_DATA update
+  if(DT_STORE.checkins&&DT_STORE.checkins.length){
+    function fCI(v){return v?Number(v).toLocaleString('pt-BR'):'—';}
+    var r0=DT_STORE.checkins[0],r1=DT_STORE.checkins[1];
+    var eJan=document.getElementById('ci-h-jan-total');if(eJan&&r0)eJan.textContent=fCI(r0[2]);
+    var eFev=document.getElementById('ci-h-fev-total');if(eFev&&r1)eFev.textContent=fCI(r1[2]);
+    if(typeof PB_DATA!=='undefined'){
+      var mk2=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      DT_STORE.checkins.forEach(function(r,i){
+        var mk=mk2[i];if(!mk||!r[2])return;
+        if(!PB_DATA.total[mk])PB_DATA.total[mk]={};
+        PB_DATA.total[mk].real=parseInt(String(r[2]).replace(/\D/g,''))||PB_DATA.total[mk].real;
+        PB_DATA.total[mk].meta=parseInt(String(r[3]).replace(/\D/g,''))||PB_DATA.total[mk].meta;
+        if(r[4])PB_DATA.total[mk].yoy=(parseFloat(r[4])/100);
+        if(r[5])PB_DATA.total[mk].mom=(parseFloat(r[5])/100);
+      });
+    }
+  }
+  // 5. METAS — update MT_DATA then re-render
+  if(DT_STORE.metas&&DT_STORE.metas.length){
+    DT_STORE.metas.forEach(function(r){
+      var md=MT_DATA.find(function(d){return d.label===r[0];});
+      if(!md)return;
+      for(var i=0;i<12;i++){if(r[i+1]!==''&&r[i+1]!==null&&r[i+1]!==undefined)md.vals[i]=parseInt(r[i+1])||md.vals[i];}
+      if(r[13]!==''&&r[13]!==null)md.ytd=parseInt(r[13])||md.ytd;
+    });
+    if(typeof buildMtTable==='function')buildMtTable();
+    if(typeof buildMtProdBars==='function')buildMtProdBars();
+    if(typeof buildMtSpark==='function')buildMtSpark();
+  }
+  // 6. ATENDIMENTO — update queue grid
+  if(DT_STORE.atendimento&&DT_STORE.atendimento.length){
+    var atGrid=document.querySelector('.atend-kpis');
+    if(atGrid){
+      var cards=atGrid.querySelectorAll('.atend-kpi');
+      DT_STORE.atendimento.forEach(function(r,i){
+        if(!cards[i])return;
+        var tEl=cards[i].querySelector('.atend-kpi-lbl'),vEl=cards[i].querySelector('.atend-kpi-val'),sEl=cards[i].querySelector('.atend-kpi-sub');
+        if(tEl)tEl.textContent=r[0];
+        if(vEl)vEl.textContent=(parseInt(r[1])||0)+(parseInt(r[2])||0);
+        if(sEl)sEl.textContent='SLA '+r[3]+'% · CSAT '+r[4];
+      });
+    }
+    if(typeof SF_QUEUES!=='undefined'){SF_QUEUES.length=0;DT_STORE.atendimento.forEach(function(r){SF_QUEUES.push(r[0]);});}
+  }
+  // 7. OKRS — update progress + re-render active panel
+  if(DT_STORE.okrs&&DT_STORE.okrs.length){
+    DT_STORE.okrs.forEach(function(r){
+      var area=r[0].toLowerCase().replace(/\s+/g,'');
+      okrProgress[area+'-'+r[2]]=parseFloat(r[5])||0;
+      var od=OKR_DATA[area]||OKR_DATA[Object.keys(OKR_DATA).find(function(k){return OKR_DATA[k].tag.toLowerCase().indexOf(area)>=0;})||''];
+      if(od)od.sections.forEach(function(sec){sec.krs.forEach(function(kobj){if(kobj.n===r[2]){kobj.text=r[3]||kobj.text;kobj.meta=r[4]||kobj.meta;}});});
+    });
+    ['cs','expansao','implantacao','aquisicao','marketing'].forEach(function(k){
+      var p=document.getElementById('okr-panel-'+k);
+      if(p&&p.style.display!=='none'&&typeof renderOkr==='function')renderOkr(k);
+    });
+  }
+  // 8. REVENUE ENGINE SCORE
+  if(DT_STORE.res_score&&DT_STORE.res_score.length&&typeof RES_DEFAULTS!=='undefined'){
+    DT_STORE.res_score.forEach(function(r){
+      var key=Object.keys(RES_DEFAULTS).find(function(k){return RES_DEFAULTS[k].label===r[0];});if(!key)return;
+      var d=RES_DEFAULTS[key];
+      if(d.sliders[0]&&r[3]!==''){
+        RES_STATE[key][d.sliders[0].k]=parseFloat(r[3]);
+        var sEl=document.getElementById('resSlider-'+key+'-'+d.sliders[0].k);
+        if(sEl){sEl.value=r[3];var mn=parseFloat(sEl.min),mx=parseFloat(sEl.max);sEl.style.setProperty('--pct',((parseFloat(r[3])-mn)/(mx-mn)*100)+'%');}
+        var dEl=document.getElementById('resSlider-'+key+'-'+d.sliders[0].k+'-val');if(dEl)dEl.textContent=r[3]+d.sliders[0].unit;
+      }
+      if(d.sliders[1]&&r[5]!==''){
+        RES_STATE[key][d.sliders[1].k]=parseFloat(r[5]);
+        var sEl2=document.getElementById('resSlider-'+key+'-'+d.sliders[1].k);
+        if(sEl2){sEl2.value=r[5];var mn2=parseFloat(sEl2.min),mx2=parseFloat(sEl2.max);sEl2.style.setProperty('--pct',((parseFloat(r[5])-mn2)/(mx2-mn2)*100)+'%');}
+        var dEl2=document.getElementById('resSlider-'+key+'-'+d.sliders[1].k+'-val');if(dEl2)dEl2.textContent=r[5]+d.sliders[1].unit;
+      }
+    });
+    if(typeof resRecalc==='function'&&typeof RES_INIT_DONE!=='undefined'&&RES_INIT_DONE)resRecalc();
+  }
+  // 9. SIMULADOR — update ALAVANCAS base values
+  if(DT_STORE.simulador&&DT_STORE.simulador.length){
+    DT_STORE.simulador.forEach(function(r){
+      var ala=ALAVANCAS.find(function(a){return a.label===r[0];});if(!ala)return;
+      if(r[1]!==''&&r[1]!==null)ala.base=parseFloat(r[1])||ala.base;
+      if(r[2]!==''&&r[2]!==null)ala.min=parseFloat(r[2])||ala.min;
+      if(r[3]!==''&&r[3]!==null)ala.max=parseFloat(r[3])||ala.max;
+    });
+  }
+  // 10. PERFORMANCE — update PFH values
+  if(DT_STORE.performance&&DT_STORE.performance.length){
+    DT_STORE.performance.forEach(function(r){
+      var key=Object.keys(PFH).find(function(k){return PFH[k].name===r[0];});if(!key)return;
+      var h=PFH[key];
+      if(r[4]!==''&&r[4]!==null)h.d=parseFloat(r[4])||h.d;
+      if(r[5]!==''&&r[5]!==null)h.occ=parseFloat(r[5])||h.occ;
+      if(r[6]!==''&&r[6]!==null)h.mrr=parseFloat(r[6])||h.mrr;
+      if(r[7]!==''&&r[7]!==null)h.adm=parseFloat(r[7])||h.adm;
+    });
+    var pfEl=document.getElementById('p-performance');
+    if(pfEl&&pfEl.style.display!=='none'&&typeof buildHotelRows==='function')buildHotelRows();
+  }
+  // 11. CHECKINS channel hero
+  if(DT_STORE.operadoras&&DT_STORE.operadoras.length){
+    var chEl=document.getElementById('ci-h-channel-jan');
+    if(chEl){var topOta=DT_STORE.operadoras[0];if(topOta)chEl.textContent=Number(topOta[1]).toLocaleString('pt-BR');}
+  }
+  dtToast('🔄 Dados propagados para todas as abas!');
+}
+
 function dtInit() {
   // pre-populate with real data already in the app
   if (DT_STORE.checkins.length === 0) {
@@ -9897,7 +10278,7 @@ function dtDelRow(ri) {
 function dtSave() {
   DT_DIRTY[DT_CURRENT] = false;
   dtUpdateStatus();
-  dtToast('✅ Dados de '+DT_LABELS[DT_CURRENT]+' salvos com sucesso!');
+  refreshAllTabs();
 }
 
 function dtClear() {
@@ -10742,6 +11123,62 @@ function scenRenderCompare(m, fs) {
 
   var el = document.getElementById('scenCompare');
   if (el) el.innerHTML = html;
+}
+
+
+function dtToggleArch(){
+  var b=document.getElementById('dtArchBody'),c=document.getElementById('dtArchChevron');
+  if(!b)return;
+  var open=b.style.display!=='none';
+  b.style.display=open?'none':'block';
+  if(c)c.textContent=open?'▾':'▴';
+  if(!open)dtRenderArchTable();
+}
+function dtRenderArchTable(){
+  var rows=[
+    ['checkins','Mês, Ano, Total Check-ins, Meta, YoY, MoM','📅 Check-ins, 📊 Dashboard, 🔮 Predição','YoY=(Real-Prev)/Prev×100 · Ating=Real/Meta×100','Checkin.xlsx / upload manual'],
+    ['operadoras','Operadora, Jan–Dez, Total','📊 Dashboard (tabela OTA), ⚙️ Motor','Total=Σ Jan:Dez · Share=OTA/Rede×100','Extranet OTAs / planilha'],
+    ['canais','Canal, Jan–Dez, Total','📊 Dashboard, 📅 Check-ins','Mesma estrutura de operadoras','PMS / ERP Hoteleiro'],
+    ['hotel','Hotel, ADR, Ocupação, MRR, Check-ins YTD','📊 Performance do Cliente','RevPAR=ADR×Ocup · MRR=ARR/12','PMS (Opera / PropertyPRO)'],
+    ['corporativo','Empresa, Segmento, Jan–Dez','📊 Dashboard (corporativo)','Total=Σ Jan:Dez','CRM Salesforce / manual'],
+    ['areas','Área, Score 0-100, 4 Dims×Valor','⚙️ Motor (Score por Área)','Score=Σ(dim_i×peso_i)/100','KPIs internos · revisão quinzenal'],
+    ['ota_saude','Operadora, Score, Paridade, Conteúdo, Conversão, Pickup','⚙️ Motor (Score OTA)','Score=Par×0.35+Cont×0.25+Conv×0.25+Pck×0.15','Monitoramento de paridade + extranet'],
+    ['kpis','Indicador, Valor, Meta, Variação, Período','📊 Dashboard (KPI strip)','Variação=(Valor-Meta)/Meta×100','Consolidação multi-fonte'],
+    ['atendimento','Fila, Abertos, Fechados, SLA%, CSAT, FRT, Backlog','🎧 Atendimento','SLA%=no_prazo/Total×100 · FRT=média first reply','Salesforce / Zendesk'],
+    ['okrs','Área, Seção, KR, Descrição, Meta, Realizado%, Status','🎯 OKRs por Área','Overall=média ponderada dos KRs · progresso manual','Auto-declarado por área'],
+    ['res_score','Pilar, Peso%, 2 Sliders, Score Calculado','🏆 Revenue Engine Score','Score_final=Σ(Score_i×Peso_i) · IOP÷FS','Inputs manuais + benchmarks SaaS'],
+    ['metas','Produto, Jan–Dez, YTD, Formato','📋 Metas por produto','Colunas Jan–Dez mapeiam MT_DATA.vals[0..11] · YTD=Σ meses relevantes','MT_DATA (hardcoded) → editável aqui'],
+    ['simulador','Alavanca, Valor Base, Mín, Máx, Step','🎛️ Simulador de Alavancas','Valor Base atualiza ALAVANCAS[i].base → recalcula impacto no simulador','ALAVANCAS[] → editável aqui'],
+    ['dashboard_osc','Mês, Oscilação Real%, Predição%','📊 Dashboard (gráfico de barras)','Bar height = |val| / maxVal × 100 · cor: <−8%=vermelho, <−4%=amarelo, ok=azul','Variação manual ou via API Rate Shopper'],
+    ['performance','Hotel, ADR, Ocupação, MRR, Adimplência','📊 Performance do Cliente','RevPAR=ADR×Ocup/100 · MRR informado pelo CS · Adimplência=pagamentos_ok/total','PFH[] (PMS/CS) → editável aqui'],
+  ];
+  var html=rows.map(function(r){
+    return'<tr style="border-bottom:1px solid var(--border)">'
+      +'<td style="padding:8px 12px;font-family:var(--font-mono);font-weight:700;color:var(--ob-purple);font-size:11px">'+r[0]+'</td>'
+      +'<td style="padding:8px 12px;font-family:var(--font-mono);font-size:10px;color:var(--ink3)">'+r[1]+'</td>'
+      +'<td style="padding:8px 12px;font-size:11px;color:var(--ink2)">'+r[2]+'</td>'
+      +'<td style="padding:8px 12px;font-family:var(--font-mono);font-size:10px;color:var(--ink3)">'+r[3]+'</td>'
+      +'<td style="padding:8px 12px;font-size:10px;color:var(--ink3);font-style:italic">'+r[4]+'</td>'
+      +'</tr>';
+  }).join('');
+  var tb=document.getElementById('dtArchTableBody');
+  if(tb)tb.innerHTML=html;
+}
+
+
+// SYNC TAB → DT_STORE (capture tab state before navigation)
+function syncTabToDT(){
+  if(typeof areaData!=='undefined')DT_STORE.areas=areaData.map(function(a){return[a.op,a.score,a.label,a.dims[0]?a.dims[0].l:'',a.dims[0]?a.dims[0].v:0,a.dims[1]?a.dims[1].l:'',a.dims[1]?a.dims[1].v:0,a.dims[2]?a.dims[2].l:'',a.dims[2]?a.dims[2].v:0,a.dims[3]?a.dims[3].l:'',a.dims[3]?a.dims[3].v:0];});
+  if(typeof healthData!=='undefined')DT_STORE.ota_saude=healthData.map(function(h){return[h.op,h.score,h.label,h.dims[0]?h.dims[0].v:0,h.dims[1]?h.dims[1].v:0,h.dims[2]?h.dims[2].v:0,h.dims[3]?h.dims[3].v:0];});
+  if(typeof MT_DATA!=='undefined')DT_STORE.metas=MT_DATA.map(function(r){return[r.label].concat(r.vals.slice()).concat([r.ytd,r.fmt]);});
+  if(typeof ALAVANCAS!=='undefined')DT_STORE.simulador=ALAVANCAS.map(function(a){return[a.label,a.base,a.min,a.max,a.step,a.unit||''];});
+  if(typeof RES_DEFAULTS!=='undefined'&&typeof RES_STATE!=='undefined'){
+    DT_STORE.res_score=Object.keys(RES_DEFAULTS).map(function(k){
+      var d=RES_DEFAULTS[k],st=RES_STATE[k]||{},s0=d.sliders[0]||{},s1=d.sliders[1]||{};
+      return[d.label,d.peso,s0.l||'',st[s0.k]!==undefined?st[s0.k]:s0.v,s1.l||'',st[s1.k]!==undefined?st[s1.k]:s1.v,d.score];
+    });
+  }
+  if(typeof PFH!=='undefined')DT_STORE.performance=Object.keys(PFH).map(function(k){var h=PFH[k],p=h.region.split('·');return[h.name,p[0].trim(),h.stars,h.q,h.d,h.occ,h.mrr,h.adm,h.bdg||''];});
 }
 
 // ── DOCS NAV
