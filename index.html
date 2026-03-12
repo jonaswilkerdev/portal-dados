@@ -70,15 +70,15 @@
 
   /* ── HEADER ── */
   header {
-    background: #f7c948;
-    border-bottom: 3px solid #c49a12;
+    background: var(--surface);
+    border-bottom: 3px solid #f7c948; /* was: 2px solid var(--ob-yellow); */
     padding: 0 36px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 60px;
     position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 10px rgba(196,154,18,.25);
+    box-shadow: var(--shadow-sm);
   }
 
   .logo {
@@ -86,21 +86,21 @@
   }
   .logo-mark { width: 38px; height: 38px; border-radius: 9px; background: var(--ob-purple-dk); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; box-shadow: 0 2px 10px rgba(61,10,92,0.35); }
   .logo-name { font-size: 16px; font-weight: 900; letter-spacing: -0.8px; color: var(--ob-purple-dk); font-family: var(--font-body); }
-  .logo-sep { color: var(--ob-purple); font-size: 20px; font-weight: 300; margin: 0 4px; line-height: 1; }
-  .logo-sub { font-size: 12px; color: var(--ob-purple-dk); font-weight: 600; opacity: .75; }
+  .logo-sep { color: var(--ob-yellow); font-size: 20px; font-weight: 300; margin: 0 4px; line-height: 1; }
+  .logo-sub { font-size: 12px; color: var(--ink3); font-weight: 500; }
 
   .header-right { display: flex; align-items: center; gap: 16px; }
   .live-badge {
     display: flex; align-items: center; gap: 5px;
     font-size: 11px; font-family: var(--font-mono);
-    color: var(--ob-purple-dk);
-    background: rgba(61,10,92,.1);
-    border: 1px solid rgba(61,10,92,.2);
+    color: var(--ob-yellow-dk);
+    background: var(--ob-yellow-lt);
+    border: 1px solid var(--ob-yellow);
     border-radius: 20px; padding: 3px 10px;
   }
   .live-dot {
     width: 5px; height: 5px; border-radius: 50%;
-    background: var(--ob-purple);
+    background: var(--ob-yellow);
     animation: blink 2s ease-in-out infinite;
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
@@ -1211,9 +1211,9 @@
   .logout-btn {
     display: flex; align-items: center; gap: 6px;
     font-size: 12px; font-weight: 600; font-family: var(--font-body);
-    color: var(--ob-purple-dk);
-    background: rgba(61,10,92,.1);
-    border: 1px solid rgba(61,10,92,.2);
+    color: var(--ink3);
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 6px 14px;
     cursor: pointer;
@@ -1221,9 +1221,9 @@
     letter-spacing: -0.1px;
   }
   .logout-btn:hover {
-    background: rgba(61,10,92,.18);
-    color: var(--ob-purple-dk);
-    border-color: rgba(61,10,92,.35);
+    background: var(--red-bg);
+    color: var(--red);
+    border-color: #fca5a5;
   }
   .logout-btn svg { transition: transform .2s; }
   .logout-btn:hover svg { transform: translateX(2px); }
@@ -2326,10 +2326,10 @@
     display:flex; align-items:center; gap:5px;
     font-size:11px; font-weight:700; font-family:var(--font-mono);
     padding:5px 11px; border-radius:8px;
-    border:1px solid rgba(61,10,92,.2); background:rgba(61,10,92,.1); color:var(--ob-purple-dk);
+    border:1px solid var(--border); background:var(--surface2); color:var(--ink3);
     cursor:pointer; transition:all .15s; white-space:nowrap;
   }
-  .gear-btn:hover { background:rgba(61,10,92,.18); color:var(--ob-purple-dk); border-color:rgba(61,10,92,.35); }
+  .gear-btn:hover { background:var(--ob-purple-lt); color:var(--ob-purple); border-color:var(--ob-purple); }
   .gear-btn svg   { transition:transform .4s ease; }
   .gear-btn:hover svg { transform:rotate(60deg); }
 
@@ -2969,168 +2969,71 @@
   .scen-cmp-bar-val  { font-size:10px; font-family:var(--font-mono); font-weight:700; width:52px; flex-shrink:0; }
 
 
-  /* ══════════════════════════════════════════════════════════
-     MOBILE — max-width 768px
-  ══════════════════════════════════════════════════════════ */
-  @media (max-width: 768px) {
-
-    /* ── Header ── */
-    header {
-      padding: 0 16px;
-      height: auto;
-      min-height: 56px;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-    }
-    .logo-sep,
-    .logo-sub,
-    .live-badge { display: none; }
-    .logo-name  { font-size: 15px; }
-    .header-right { gap: 8px; }
-    .gear-btn   { padding: 5px 8px; font-size: 10px; }
-    .logout-btn { padding: 5px 10px; font-size: 11px; }
-
-    /* ── Tabs — horizontal scroll ── */
-    .tabs-bar {
-      padding: 0 8px;
-      justify-content: flex-start;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      gap: 0;
-      flex-wrap: nowrap;
-    }
-    .tabs-bar::-webkit-scrollbar { display: none; }
-    .tab {
-      padding: 12px 12px;
-      font-size: 12px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ── Main content ── */
-    main { padding: 16px; }
-
-    /* ── Page header ── */
-    .page-hd {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .page-hd h2  { font-size: 18px; }
-    .page-hd p   { font-size: 11px; }
-
-    /* ── KPI strip: 2 cols ── */
-    .kpi-row { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .kpi     { padding: 14px 14px; }
-    .kpi-val { font-size: 22px; }
-
-    /* ── Grids → single col ── */
-    .grid-2,
-    .grid-3 { grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
-
-    /* ── Cards ── */
-    .card-hd   { padding: 12px 14px 10px; flex-wrap: wrap; gap: 6px; }
-    .card-body { padding: 14px; }
-    .card-title { font-size: 12px; }
-
-    /* ── Funil / Revenue Engine hero layout ── */
-    .res-layout  { grid-template-columns: 1fr; gap: 14px; }
-    .scen-grid   { grid-template-columns: 1fr; gap: 12px; }
-    .res-bottom  { grid-template-columns: 1fr; gap: 12px; }
-
-    /* ── Motor de RevOps hero strip ── */
-    .motor-hero  { flex-direction: column; gap: 12px; padding: 18px 16px; }
-    .motor-hero-kpis { grid-template-columns: repeat(2,1fr); }
-
-    /* ── Alavancas: 1 col ── */
-    .alavancas-grid { grid-template-columns: 1fr; }
-
-    /* ── Simulador sliders ── */
-    .sim2-layout { grid-template-columns: 1fr; }
-
-    /* ── OKR layout ── */
-    .okr-layout     { grid-template-columns: 1fr; }
-    .okr-sidebar    { max-height: 220px; overflow-y: auto; }
-    .okr-hero       { padding: 18px 16px; }
-
-    /* ── Checkins: hide less important columns ── */
-    .ci-table th:nth-child(n+5),
-    .ci-table td:nth-child(n+5) { display: none; }
-
-    /* ── Metas table: keep essential cols ── */
-    .mt-table th:nth-child(n+5),
-    .mt-table td:nth-child(n+5) { display: none; }
-
-    /* ── Fluxo / Revisão layout ── */
-    .fluxo-steps { flex-direction: column; }
-    .fluxo-arrow { transform: rotate(90deg); }
-
-    /* ── Dashboard table: 4 cols max ── */
-    .dash-tbl th:nth-child(n+6),
-    .dash-tbl td:nth-child(n+6) { display: none; }
-
-    /* ── Alertas ── */
-    .ae-kpis { grid-template-columns: repeat(2,1fr); }
-
-    /* ── Performance do Cliente ── */
-    .pf-header   { flex-direction: column; gap: 10px; }
-    .pf-actions  { flex-wrap: wrap; }
-    .pf-hotels   { grid-template-columns: 1fr 1fr; }
-    .pf-body     { grid-template-columns: 1fr; }
-
-    /* ── Atendimento ── */
-    .atend-layout { grid-template-columns: 1fr; }
-
-    /* ── Predição: zone cards ── */
-    .zone-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
-
-    /* ── Revenue Engine Score ── */
-    .res-ring-wrap { width: 130px; height: 130px; }
-    .res-ring-svg  { width: 130px; height: 130px; }
-    .res-score-val { font-size: 34px; }
-    .res-vel-strip { grid-template-columns: 1fr 1fr; }
-    .res-metrics   { grid-template-columns: 1fr; }
-
-    /* ── Dados ── */
-    .dados-toolbar { flex-wrap: wrap; gap: 8px; }
-    .dados-toolbar-right { width: 100%; }
-    .dt-table th:nth-child(n+5),
-    .dt-table td:nth-child(n+5) { display: none; }
-
-    /* ── Documentação ── */
-    .doc-layout { grid-template-columns: 1fr; }
-    .doc-nav    { display: none; }
-
-    /* ── Modals: full width ── */
-    .am-modal,
-    .um-modal,
-    .pf-modal { width: 95vw; padding: 18px; }
-
-    /* ── Gestão de usuários ── */
-    .um-layout { grid-template-columns: 1fr; }
-    .um-list   { max-height: 200px; }
-
-    /* ── Cenários compare ── */
-    .scen-compare       { padding: 14px; }
-    .scen-cmp-row       { flex-direction: column; gap: 4px; }
-    .scen-cmp-lbl       { width: auto; }
+  /* ── Area Score Tooltip ── */
+  .area-info-btn {
+    margin-left: auto;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--ob-purple-lt);
+    border: 1.5px solid var(--ob-purple);
+    color: var(--ob-purple);
+    font-size: 9px; font-weight: 900;
+    font-family: var(--font-mono);
+    display: flex; align-items: center; justify-content: center;
+    cursor: default;
+    position: relative;
+    flex-shrink: 0;
+    transition: background .15s;
   }
+  .area-info-btn:hover { background: var(--ob-purple); color: #fff; }
 
-  /* ══ Small phones — max 480px ══ */
-  @media (max-width: 480px) {
-    .kpi-row  { grid-template-columns: 1fr; gap: 8px; }
-    .kpi-val  { font-size: 20px; }
-    .pf-hotels { grid-template-columns: 1fr; }
-    .zone-cards { grid-template-columns: 1fr; }
-    .ae-kpis  { grid-template-columns: 1fr 1fr; }
-    main      { padding: 12px; }
-    .page-hd h2 { font-size: 16px; }
+  .area-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    right: -4px;
+    width: 240px;
+    background: var(--ob-purple-dk);
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    z-index: 200;
+    box-shadow: 0 8px 24px rgba(30,8,54,.35);
+    pointer-events: none;
   }
+  .area-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; right: 10px;
+    border: 6px solid transparent;
+    border-top-color: var(--ob-purple-dk);
+  }
+  .area-info-btn:hover .area-tooltip { display: block; }
+
+  .area-tooltip-title {
+    font-size: 11px; font-weight: 700;
+    color: var(--ob-yellow);
+    margin-bottom: 8px;
+    letter-spacing: .3px;
+  }
+  .area-tooltip-formula {
+    background: rgba(255,255,255,.08);
+    border-radius: 6px;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    font-size: 10px;
+    color: #e9d5ff;
+    letter-spacing: .2px;
+  }
+  .area-tooltip-row {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 3px;
+  }
+  .area-tooltip-lbl { color: rgba(255,255,255,.65); }
+  .area-tooltip-w   { color: var(--ob-yellow); font-weight: 700; }
 
   </style>
 </head>
@@ -3323,61 +3226,16 @@
   </div>
 
   <div class="grid-2" style="margin-bottom:16px">
-    <!-- FUNIL DE RECEITA -->
+    <!-- SCORE DE ÁREAS -->
     <div class="card">
       <div class="card-hd">
         <div>
-          <div class="card-title">Funil de Receita — Rede Omnibees</div>
-          <div class="card-sub">visibilidade → conversão → receita confirmada · mês atual</div>
+          <div class="card-title">Score de Saúde por Área</div>
+          <div class="card-sub">índice 0–100 · composto por volume, conversão, SLA e satisfação</div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="funil-wrap">
-          <div class="funil-step">
-            <div class="funil-bar-outer">
-              <div class="funil-bar-fill" style="width:100%;background:#1a1a18">
-                <span class="funil-label">Impressões / Visibilidade</span>
-              </div>
-            </div>
-            <div class="funil-meta"><div class="funil-val">2.84M</div><div class="funil-delta" style="color:var(--green)">▲ +8%</div></div>
-          </div>
-          <div class="funil-arrow">↓ conv. 12.4%</div>
-          <div class="funil-step">
-            <div class="funil-bar-outer">
-              <div class="funil-bar-fill" style="width:78%;background:#2d3748">
-                <span class="funil-label">Cliques / Interesse</span>
-              </div>
-            </div>
-            <div class="funil-meta"><div class="funil-val">352k</div><div class="funil-delta" style="color:var(--amber)">▼ −2%</div></div>
-          </div>
-          <div class="funil-arrow">↓ conv. 5.1%</div>
-          <div class="funil-step">
-            <div class="funil-bar-outer">
-              <div class="funil-bar-fill" style="width:52%;background:#1d4ed8">
-                <span class="funil-label">Reservas Iniciadas</span>
-              </div>
-            </div>
-            <div class="funil-meta"><div class="funil-val">18.2k</div><div class="funil-delta" style="color:var(--amber)">▼ −5%</div></div>
-          </div>
-          <div class="funil-arrow">↓ conv. 78.3%</div>
-          <div class="funil-step">
-            <div class="funil-bar-outer">
-              <div class="funil-bar-fill" style="width:38%;background:#15803d">
-                <span class="funil-label">Reservas Confirmadas</span>
-              </div>
-            </div>
-            <div class="funil-meta"><div class="funil-val">14.3k</div><div class="funil-delta" style="color:var(--red)">▼ −9%</div></div>
-          </div>
-          <div class="funil-arrow">× ADR médio</div>
-          <div class="funil-step">
-            <div class="funil-bar-outer">
-              <div class="funil-bar-fill" style="width:30%;background:#0f766e">
-                <span class="funil-label">Receita Bruta Confirmada</span>
-              </div>
-            </div>
-            <div class="funil-meta"><div class="funil-val">R$4.2M</div><div class="funil-delta" style="color:var(--red)">▼ −4.2%</div></div>
-          </div>
-        </div>
+      <div class="card-body" style="padding:14px">
+        <div class="health-grid" id="areaHealthGrid" style="grid-template-columns:repeat(3,1fr);gap:10px"></div>
       </div>
     </div>
 
@@ -3522,7 +3380,7 @@
             <span class="alav-status" style="background:#f5f3ff;color:#7c3aed">BETA</span>
           </div>
           <div class="alav-title">Precificação Dinâmica</div>
-          <div class="alav-desc">Ajuste automático de tarifas por demanda e compset. Em  com 42 hotéis piloto da rede.</div>
+          <div class="alav-desc">Ajuste automático de tarifas por demanda e compset. Em teste com 42 hotéis piloto da rede.</div>
           <div class="alav-impact">
             <span class="alav-impact-lbl">Cobertura piloto</span>
             <div class="alav-impact-bar"><div class="alav-impact-fill" style="width:5%;background:#8b5cf6"></div></div>
@@ -5472,10 +5330,8 @@ IO_Ajustado ≤ −0.12  →  🔴 CRÍTICO      (escalonamento imediato)</div>
           <li>Todas as alterações são aplicadas imediatamente em tempo de execução</li>
         </ul>
         <div class="doc-h3">Credenciais padrão</div>
-        <div class="doc-code">
-          Usuário:  teste     |  Senha: teste       |  Nível: Usuário Comum
-          Usuário:  admin     |  Senha: admin2026   |  Nível: Administrado
-        </div>
+        <div class="doc-code">Usuário:  teste     |  Senha: teste       |  Nível: Usuário Comum
+Usuário:  admin     |  Senha: admin2026   |  Nível: Administrador</div>
       </div>
 
       <!-- GESTÃO DE DADOS -->
@@ -6524,6 +6380,75 @@ const healthData = [
   { op: 'Trip.com', score: 55, label: 'Atenção', color: '#d97706', labelColor: 'var(--amber)',
     dims: [{l:'Paridade', v:50}, {l:'Conteúdo', v:63}, {l:'Conversão', v:52}, {l:'Pickup', v:55}] },
 ];
+
+
+// ── SCORE DE ÁREAS ──────────────────────────────────────────
+const areaTT = {"Marketing": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("Geração MQL", "30%"), ("Conv. MQL→SQL", "25%"), ("CAC", "25%"), ("Presença digital", "20%")]}, "Vendas": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("Win Rate", "35%"), ("Ciclo de Vendas", "25%"), ("Volume Pipeline", "25%"), ("Ticket Médio", "15%")]}, "Pré-Vendas": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("Qualif. SQL", "30%"), ("Tempo de Resposta", "25%"), ("Taxa de Demo", "25%"), ("Conversão Demo", "20%")]}, "Implantação": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("% Go-live no prazo", "35%"), ("SLA cumprido", "30%"), ("Onboarding Health", "20%"), ("Churn Precoce", "15%")]}, "Atendimento": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("First Reply Time", "30%"), ("Resolução no prazo", "30%"), ("CSAT", "25%"), ("Backlog aberto", "15%")]}, "CS": {"formula": "Score = Σ(dim × peso) / 100", "dims": [("NRR (Net Rev. Ret.)", "35%"), ("Risco de Churn", "25%"), ("NPS", "25%"), ("Taxa de Expansão", "15%")]}};
+
+function renderAreaTooltip(name) {
+  const tt = areaTT[name];
+  if (!tt) return '';
+  const rows = tt.dims.map(([d,w]) =>
+    `<div class="area-tooltip-row"><span class="area-tooltip-lbl">${d}</span><span class="area-tooltip-w">${w}</span></div>`
+  ).join('');
+  return `<div class="area-tooltip">
+    <div class="area-tooltip-title">📐 Cálculo — ${name}</div>
+    <div class="area-tooltip-formula">${tt.formula}</div>
+    ${rows}
+  </div>`;
+}
+const areaData = [
+  { op: 'Marketing', score: 72, label: 'Bom', color: '#5c1085', labelColor: 'var(--ob-purple)',
+    dims: [{l:'Geração MQL', v:68}, {l:'Conv. MQL→SQL', v:74}, {l:'CAC', v:71}, {l:'Presença', v:76}] },
+  { op: 'Vendas', score: 65, label: 'Atenção', color: '#c49a12', labelColor: 'var(--amber)',
+    dims: [{l:'Win Rate', v:62}, {l:'Ciclo Vendas', v:58}, {l:'Pipeline', v:70}, {l:'Ticket', v:69}] },
+  { op: 'Pré-Vendas', score: 78, label: 'Bom', color: '#5c1085', labelColor: 'var(--ob-purple)',
+    dims: [{l:'Qualif. SQL', v:80}, {l:'Tempo Resp.', v:75}, {l:'Taxa Demo', v:82}, {l:'Convert.', v:74}] },
+  { op: 'Implantação', score: 84, label: 'Ótimo', color: '#1a7a4a', labelColor: 'var(--green)',
+    dims: [{l:'Go-live', v:88}, {l:'SLA Prazo', v:86}, {l:'Onb. Health', v:82}, {l:'Churn Prev.', v:80}] },
+  { op: 'Atendimento', score: 58, label: 'Atenção', color: '#c49a12', labelColor: 'var(--amber)',
+    dims: [{l:'First Reply', v:55}, {l:'Resolução', v:60}, {l:'CSAT', v:62}, {l:'Backlog', v:54}] },
+  { op: 'CS', score: 70, label: 'Bom', color: '#5c1085', labelColor: 'var(--ob-purple)',
+    dims: [{l:'NRR', v:68}, {l:'Churn Risk', v:65}, {l:'NPS', v:74}, {l:'Expansão', v:72}] },
+];
+
+const areaGrid = document.getElementById('areaHealthGrid');
+if (areaGrid) {
+  areaData.forEach(h => {
+    const circ = Math.PI * 2 * 20;
+    const offset = circ - (h.score / 100) * circ;
+    const card = document.createElement('div');
+    card.className = 'health-card';
+    card.innerHTML = `
+      <div class="health-op">${h.op}<div class="area-info-btn">i${renderAreaTooltip(h.op)}</div></div>
+      <div class="health-score-wrap">
+        <div class="health-score-ring">
+          <svg width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#f0f0ec" stroke-width="5"/>
+            <circle cx="24" cy="24" r="20" fill="none" stroke="${h.color}" stroke-width="5"
+              stroke-dasharray="${circ.toFixed(2)}" stroke-dashoffset="${offset.toFixed(2)}"
+              stroke-linecap="round" transform="rotate(-90,24,24)"/>
+          </svg>
+          <div class="health-score-num" style="color:${h.labelColor}">${h.score}</div>
+        </div>
+        <div>
+          <div class="health-label" style="color:${h.labelColor}">${h.label}</div>
+          <div class="health-sublabel">score de área</div>
+        </div>
+      </div>
+      <div class="health-dims">
+        ${h.dims.map(d => `
+          <div class="health-dim">
+            <span class="health-dim-lbl">${d.l}</span>
+            <div class="health-dim-bar"><div class="health-dim-fill" style="width:${d.v}%;background:${h.color}88"></div></div>
+            <span class="health-dim-val">${d.v}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    areaGrid.appendChild(card);
+  });
+}
 
 const hGrid = document.getElementById('healthGrid');
 if (hGrid) {
