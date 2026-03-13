@@ -1731,6 +1731,260 @@
 
 
   /* ══════════════════════════════════════════════════════
+     PAINEL DE ATIVIDADES
+  ══════════════════════════════════════════════════════ */
+
+  /* Status KPI strip */
+  .at-strip {
+    display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 22px;
+  }
+  .at-kpi {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--border); text-align: center;
+    cursor: pointer; transition: all .18s;
+  }
+  .at-kpi:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+  .at-kpi.active { background: var(--ob-purple-lt); border-top-color: var(--ob-purple); }
+  .at-kpi.s-total    { border-top-color: var(--ob-purple-md); }
+  .at-kpi.s-pendente { border-top-color: var(--amber); }
+  .at-kpi.s-revisao  { border-top-color: #1d4ed8; }
+  .at-kpi.s-concluida{ border-top-color: var(--green); }
+  .at-kpi.s-escalada { border-top-color: var(--red); }
+  .at-kpi-num { font-size: 28px; font-weight: 800; font-family: var(--font-mono); line-height: 1; color: var(--ob-purple-dk); }
+  .at-kpi.s-pendente  .at-kpi-num { color: var(--amber); }
+  .at-kpi.s-revisao   .at-kpi-num { color: #1d4ed8; }
+  .at-kpi.s-concluida .at-kpi-num { color: var(--green); }
+  .at-kpi.s-escalada  .at-kpi-num { color: var(--red); }
+  .at-kpi-lbl { font-size: 9px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .8px; color: var(--ink3); margin-top: 4px; }
+
+  /* 2-col layout */
+  .at-layout { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+
+  /* LEFT: user panel */
+  .at-users-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
+    position: sticky; top: 76px;
+  }
+  .at-users-hd {
+    background: linear-gradient(135deg, var(--ob-purple-dk), var(--ob-purple));
+    padding: 14px 18px;
+  }
+  .at-users-hd-title { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .at-users-hd-sub   { font-size: 10px; font-family: var(--font-mono); color: rgba(247,201,72,.75); }
+  .at-users-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+
+  .at-user-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+    background: var(--surface2); transition: all .15s; cursor: pointer;
+  }
+  .at-user-card:hover { box-shadow: var(--shadow-sm); border-color: var(--ob-purple); background: var(--surface); }
+  .at-user-card.active { border-color: var(--ob-purple); background: var(--ob-purple-lt); }
+  .at-user-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .at-uav {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; flex-shrink: 0; font-family: var(--font-mono);
+  }
+  .at-uav.av-admin { background: var(--ob-purple); color: #fff; }
+  .at-uav.av-user  { background: var(--surface3); color: var(--ob-purple-dk); }
+  .at-user-name  { font-size: 12px; font-weight: 700; color: var(--ink); }
+  .at-user-role  { font-size: 10px; font-family: var(--font-mono); color: var(--ink3); margin-top: 1px; }
+  .at-user-stats { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; }
+  .at-ustat {
+    text-align: center; padding: 5px 2px; border-radius: 6px; background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .at-ustat-num { font-size: 15px; font-weight: 800; font-family: var(--font-mono); line-height: 1; }
+  .at-ustat-lbl { font-size: 7px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .4px; color: var(--ink3); margin-top: 2px; }
+  .at-ustat.s-pend  .at-ustat-num { color: var(--amber); }
+  .at-ustat.s-rev   .at-ustat-num { color: #1d4ed8; }
+  .at-ustat.s-done  .at-ustat-num { color: var(--green); }
+  .at-ustat.s-esc   .at-ustat-num { color: var(--red); }
+
+  /* RIGHT: history board */
+  .at-board { display: flex; flex-direction: column; gap: 0; }
+
+  .at-history-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
+  }
+  .at-history-hd {
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface2); flex-wrap: wrap; gap: 8px;
+  }
+  .at-history-title { font-size: 13px; font-weight: 700; color: var(--ob-purple-dk); }
+  .at-hf-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  .at-hf-btn {
+    font-size: 10px; font-family: var(--font-mono); padding: 4px 10px;
+    border-radius: 5px; cursor: pointer; border: 1px solid var(--border);
+    background: var(--surface); color: var(--ink3); transition: all .15s;
+  }
+  .at-hf-btn.on, .at-hf-btn:hover { background: var(--ob-purple-lt); color: var(--ob-purple); border-color: var(--ob-purple); }
+
+  .at-history-empty {
+    padding: 48px 20px; text-align: center;
+    font-size: 12px; color: var(--ink3); font-family: var(--font-mono); line-height: 2;
+  }
+  .at-history-list { padding: 0; }
+
+  /* individual task card */
+  .at-item {
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    transition: background .12s;
+  }
+  .at-item:last-child { border-bottom: none; }
+  .at-item:hover { background: var(--surface2); }
+  .at-item.expanded { background: var(--ob-purple-lt); }
+
+  .at-item-top { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+  .at-type-badge {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 700;
+    padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 1px; white-space: nowrap;
+  }
+  .at-info { flex: 1; min-width: 0; }
+  .at-item-title  { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .at-item-entity { font-size: 10px; color: var(--ink3); font-family: var(--font-mono); margin-top: 2px; display: flex; gap: 5px; flex-wrap: wrap; }
+  .at-item-meta   { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; align-items: center; }
+  .at-meta-item   { font-size: 10px; font-family: var(--font-mono); color: var(--ink3); display: flex; align-items: center; gap: 4px; }
+  .at-user-lbl  { color: var(--ob-purple-dk); font-weight: 700; }
+  .at-assign-lbl{ color: #1d4ed8; font-weight: 700; }
+  .at-status-dot{ width: 6px; height: 6px; border-radius: 50%; }
+
+  /* expanded detail */
+  .at-item-detail { display: none; margin-top: 10px; animation: fadeUp .2s ease both; }
+  .at-item.expanded .at-item-detail { display: block; }
+  .at-summary-box {
+    background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--ob-yellow);
+    border-radius: 0 8px 8px 0; padding: 10px 14px;
+    font-size: 12px; color: var(--ink2); line-height: 1.7; margin-bottom: 10px;
+  }
+  .at-checks { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .at-check-tag {
+    font-size: 10px; font-family: var(--font-mono); padding: 2px 8px;
+    border-radius: 4px; display: flex; align-items: center; gap: 4px;
+  }
+  .at-check-tag.done { background: rgba(22,163,74,.1); color: #15803d; }
+  .at-check-tag.skip { background: var(--surface2); color: var(--ink3); text-decoration: line-through; }
+
+  /* admin action buttons */
+  .at-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .at-validate-btn {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 700;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; border: none;
+    background: var(--green); color: #fff; transition: all .15s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .at-validate-btn:hover { background: #15803d; }
+  .at-reject-btn {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 700;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer;
+    background: var(--red-bg); color: var(--red); border: 1px solid rgba(192,23,58,.3);
+    transition: all .15s;
+  }
+  .at-reject-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+  .at-validated-badge {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 700;
+    padding: 5px 12px; border-radius: 6px;
+    background: rgba(22,163,74,.1); color: var(--green); border: 1px solid rgba(22,163,74,.3);
+  }
+  .at-rejected-badge {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 700;
+    padding: 5px 12px; border-radius: 6px;
+    background: var(--red-bg); color: var(--red); border: 1px solid rgba(192,23,58,.2);
+  }
+
+  /* flash */
+  @keyframes atFlash { 0%{background:var(--ob-yellow-lt)} 100%{background:transparent} }
+  .at-item.new-flash { animation: atFlash 1.5s ease both; }
+
+  /* modal field helpers (reuse um- pattern) */
+  .at-field-label {
+    font-size: 10px; font-family: var(--font-mono); text-transform: uppercase;
+    letter-spacing: 1px; color: var(--ink3); font-weight: 600; margin-bottom: 5px;
+  }
+  .at-admin-badge {
+    display: inline-block; font-size: 9px; font-family: var(--font-mono);
+    background: var(--ob-yellow); color: var(--ob-purple-dk); font-weight: 700;
+    padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+  }
+  .at-select-wrap { position: relative; }
+  .at-select {
+    width: 100%; padding: 10px 32px 10px 12px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--surface2);
+    font-size: 12px; font-family: var(--font-body); color: var(--ink);
+    cursor: pointer; appearance: none; outline: none; transition: border-color .15s;
+    box-sizing: border-box;
+  }
+  .at-select:focus { border-color: var(--ob-purple); background: #fff; }
+  .at-select-arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 10px; color: var(--ink3); pointer-events: none; }
+  .at-ta {
+    width: 100%; min-height: 80px; padding: 10px 12px;
+    border-radius: 8px; border: 1.5px solid var(--border);
+    font-size: 12px; font-family: var(--font-body); color: var(--ink);
+    background: var(--surface2); outline: none; resize: vertical;
+    transition: border-color .15s; box-sizing: border-box; line-height: 1.6;
+  }
+  .at-ta:focus { border-color: var(--ob-purple); background: #fff; }
+  .at-ta::placeholder { color: var(--ink3); }
+  .at-type-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .at-type-chip {
+    font-size: 10px; font-family: var(--font-mono); font-weight: 600;
+    padding: 4px 10px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface2); color: var(--ink3);
+    transition: all .15s;
+  }
+  .at-type-chip.on { background: var(--ob-purple); color: #fff; border-color: var(--ob-purple); }
+  .at-type-chip:hover:not(.on) { background: var(--ob-purple-lt); color: var(--ob-purple); border-color: var(--ob-purple); }
+  .at-search-wrap { position: relative; }
+  .at-search-input {
+    width: 100%; padding: 10px 12px 10px 34px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--surface2);
+    font-size: 12px; font-family: var(--font-body); color: var(--ink);
+    outline: none; transition: all .15s; box-sizing: border-box;
+  }
+  .at-search-input:focus { border-color: var(--ob-purple); background: #fff; }
+  .at-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
+  .at-search-dropdown {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: #fff; border: 1.5px solid var(--ob-purple); border-radius: 8px;
+    box-shadow: var(--shadow); z-index: 500; max-height: 200px; overflow-y: auto;
+  }
+  .at-search-dropdown.open { display: block; }
+  .at-search-option {
+    padding: 9px 14px; font-size: 12px; color: var(--ink2); cursor: pointer;
+    border-bottom: 1px solid var(--border); transition: background .1s;
+  }
+  .at-search-option:last-child { border-bottom: none; }
+  .at-search-option:hover, .at-search-option.focused { background: var(--ob-purple-lt); color: var(--ob-purple); }
+  .at-search-empty { padding: 12px 14px; font-size: 11px; color: var(--ink3); font-family: var(--font-mono); text-align: center; }
+  .at-entity-chip {
+    display: none; align-items: center; gap: 8px; padding: 8px 12px;
+    background: var(--ob-purple-lt); border: 1px solid var(--ob-purple);
+    border-radius: 8px; font-size: 12px; color: var(--ob-purple-dk); font-weight: 600;
+  }
+  .at-entity-chip.show { display: flex; }
+  .at-entity-chip-remove { margin-left: auto; cursor: pointer; font-size: 14px; color: var(--ob-purple); opacity: .6; }
+  .at-entity-chip-remove:hover { opacity: 1; }
+  .at-submit-btn {
+    width: 100%; padding: 12px; border-radius: 10px;
+    background: var(--ob-yellow); border: none; cursor: pointer;
+    font-size: 13px; font-weight: 800; font-family: var(--font-body);
+    color: var(--ob-purple-dk); transition: all .2s;
+    box-shadow: 0 2px 10px rgba(247,201,72,.4);
+  }
+  .at-submit-btn:hover { background: #fdd835; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(247,201,72,.5); }
+  .at-box {
+    width: 15px; height: 15px; border-radius: 3px; flex-shrink: 0;
+    border: 2px solid var(--border2); background: var(--surface);
+    display: flex; align-items: center; justify-content: center; transition: all .15s;
+  }
+  .at-box.on { background: var(--ob-purple); border-color: var(--ob-purple); }
+  .at-box.on::after { content: '✓'; font-size: 9px; color: #fff; font-weight: 700; }
+
+  /* ══════════════════════════════════════════════════════
      ATENDIMENTO — SALESFORCE INTEGRATION + SLA DASHBOARD
   ══════════════════════════════════════════════════════ */
 
@@ -3209,6 +3463,7 @@
   <button class="tab" onclick="go('docs',this)">📄 Documentação</button>
   <button class="tab" onclick="go('revscore',this);resInit()">🏆 Revenue Engine Score</button>
   <button class="tab" onclick="go('dados',this);dtRender()">🗃️ Dados</button>
+  <button class="tab" onclick="go('atividades',this);atInit()">📌 Painel de Atividades <span class="tab-count" id="at-tab-count" style="background:var(--ob-purple);color:#fff">0</span></button>
 </div>
 
 <main>
@@ -5892,6 +6147,179 @@ Usuário Comum: Visualização · 📥 Exportar CSV</div>
 </div>
 
 
+
+<!-- ══ PAINEL DE ATIVIDADES ══ -->
+<div class="panel" id="p-atividades">
+  <div class="page-hd">
+    <div>
+      <h2>Painel de Atividades</h2>
+      <p>Análises operacionais · atribuição por usuário · validação pelo administrador</p>
+    </div>
+    <button class="refresh-btn" onclick="atOpenModal()">+ Nova Análise</button>
+  </div>
+
+  <!-- Status strip -->
+  <div class="at-strip">
+    <div class="at-kpi s-total"    onclick="atFilter('all',this)">
+      <div class="at-kpi-num" id="atKpiTotal">0</div>
+      <div class="at-kpi-lbl">Total</div>
+    </div>
+    <div class="at-kpi s-pendente" onclick="atFilter('Pendente',this)">
+      <div class="at-kpi-num" id="atKpiPend">0</div>
+      <div class="at-kpi-lbl">⏳ Pendente</div>
+    </div>
+    <div class="at-kpi s-revisao"  onclick="atFilter('Em revisão',this)">
+      <div class="at-kpi-num" id="atKpiRev">0</div>
+      <div class="at-kpi-lbl">🔍 Em Revisão</div>
+    </div>
+    <div class="at-kpi s-concluida" onclick="atFilter('Concluída',this)">
+      <div class="at-kpi-num" id="atKpiDone">0</div>
+      <div class="at-kpi-lbl">✅ Concluída</div>
+    </div>
+    <div class="at-kpi s-escalada"  onclick="atFilter('Escalada',this)">
+      <div class="at-kpi-num" id="atKpiEsc">0</div>
+      <div class="at-kpi-lbl">🚨 Escalada</div>
+    </div>
+  </div>
+
+  <!-- 2-col layout -->
+  <div class="at-layout">
+
+    <!-- LEFT: user cards -->
+    <div class="at-users-panel">
+      <div class="at-users-hd">
+        <div class="at-users-hd-title">👥 Análises por Usuário</div>
+        <div class="at-users-hd-sub" id="atUsersPanelSub">visão consolidada</div>
+      </div>
+      <div class="at-users-body" id="atUsersGrid">
+        <div style="padding:16px;text-align:center;font-size:11px;color:var(--ink3);font-family:var(--font-mono)">Faça login para ver os dados.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: history board -->
+    <div class="at-board">
+      <div class="at-history-wrap">
+        <div class="at-history-hd">
+          <div class="at-history-title">📜 Histórico de Análises</div>
+          <div class="at-hf-btns">
+            <span class="at-hf-btn on"  onclick="atFilter('all',this)">Todos</span>
+            <span class="at-hf-btn"     onclick="atFilter('Pendente',this)">Pendente</span>
+            <span class="at-hf-btn"     onclick="atFilter('Em revisão',this)">Em Revisão</span>
+            <span class="at-hf-btn"     onclick="atFilter('Concluída',this)">Concluída</span>
+            <span class="at-hf-btn"     onclick="atFilter('Escalada',this)">Escalada</span>
+          </div>
+        </div>
+        <div id="atHistoryBody">
+          <div class="at-history-empty">📋 Nenhuma análise registrada ainda.<br>Clique em <strong>+ Nova Análise</strong> para começar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Nova Análise ══ -->
+  <div class="um-overlay" id="atModal" onclick="if(event.target===this)atCloseModal()" style="align-items:flex-start;padding-top:70px">
+    <div class="um-modal" style="width:560px;max-height:calc(100vh - 90px)">
+      <!-- Header amarelo Omnibees -->
+      <div class="um-hd">
+        <div class="um-hd-left">
+          <div class="um-hd-icon">📌</div>
+          <div>
+            <div class="um-hd-title">Nova Análise Operacional</div>
+            <div class="um-hd-sub">Preencha os campos e atribua ao analista responsável</div>
+          </div>
+        </div>
+        <button class="um-x" onclick="atCloseModal()">✕</button>
+      </div>
+      <!-- Body -->
+      <div style="overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px">
+
+        <!-- Atribuir a (somente Admin) -->
+        <div id="atAssignWrap">
+          <div class="at-field-label">Atribuir análise a <span class="at-admin-badge">Admin</span></div>
+          <div class="at-select-wrap">
+            <select class="at-select" id="atAssignTo">
+              <option value="">— selecione o analista —</option>
+            </select>
+            <span class="at-select-arrow">▼</span>
+          </div>
+        </div>
+
+        <!-- Tipo de indicador -->
+        <div>
+          <div class="at-field-label">Tipo de Indicador</div>
+          <div class="at-select-wrap">
+            <select class="at-select" id="atIndType" onchange="atOnTypeChange()">
+              <option value="">— selecione o tipo —</option>
+              <option value="Canal">Canal</option>
+              <option value="Operadora">Operadora</option>
+              <option value="Hotel">Hotel</option>
+              <option value="OTA">OTA</option>
+              <option value="Corporativo">Corporativo</option>
+            </select>
+            <span class="at-select-arrow">▼</span>
+          </div>
+        </div>
+
+        <!-- Entidade -->
+        <div id="atEntityWrap" style="display:none">
+          <div class="at-field-label" id="atEntityLabel">Selecionar entidade</div>
+          <div class="at-entity-chip" id="atEntityChip">
+            <span id="atEntityChipName">—</span>
+            <span class="at-entity-chip-remove" onclick="atClearEntity()">✕</span>
+          </div>
+          <div class="at-search-wrap" id="atSearchWrap">
+            <span class="at-search-icon">🔍</span>
+            <input class="at-search-input" id="atSearchInput" type="text"
+              placeholder="Digite para buscar..."
+              oninput="atFilterEntities()" onfocus="atOpenDrop()" onkeydown="atNavDrop(event)">
+            <div class="at-search-dropdown" id="atSearchDrop"></div>
+          </div>
+        </div>
+
+        <!-- Templates -->
+        <div>
+          <div class="at-field-label">Modelos de Checklist</div>
+          <div class="at-type-chips" id="atTypeChips">
+            <span class="at-type-chip" onclick="atToggleChip(this,'triagem')">🔍 Triagem</span>
+            <span class="at-type-chip" onclick="atToggleChip(this,'paridade')">⚖️ Paridade</span>
+            <span class="at-type-chip" onclick="atToggleChip(this,'conteudo')">📸 Conteúdo</span>
+            <span class="at-type-chip" onclick="atToggleChip(this,'plano')">🎯 Plano Ação</span>
+          </div>
+        </div>
+
+        <!-- Itens dinâmicos -->
+        <div id="atDynItems" style="display:none">
+          <div class="at-field-label">Itens do Checklist</div>
+          <div id="atDynList" style="display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto"></div>
+        </div>
+
+        <!-- Resumo -->
+        <div>
+          <div class="at-field-label">Resumo / Instrução da Análise</div>
+          <textarea class="at-ta" id="atSummary"
+            placeholder="Descreva o que deve ser analisado, achados, causa-raiz ou ações propostas..."></textarea>
+        </div>
+
+        <!-- Status -->
+        <div>
+          <div class="at-field-label">Status inicial</div>
+          <div class="at-select-wrap">
+            <select class="at-select" id="atStatusSel">
+              <option value="Pendente">⏳ Pendente</option>
+              <option value="Em revisão">🔍 Em Revisão</option>
+              <option value="Concluída">✅ Concluída</option>
+              <option value="Escalada">🚨 Escalada</option>
+            </select>
+            <span class="at-select-arrow">▼</span>
+          </div>
+        </div>
+
+        <button class="at-submit-btn" onclick="atSubmit()">✓ Registrar Análise</button>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <!-- ══ DADOS ══ -->
 <div class="panel" id="p-dados">
@@ -11201,6 +11629,401 @@ function sDoc(id, el) {
   document.querySelectorAll('.docs-nav-item').forEach(i => i.classList.remove('on'));
   el.classList.add('on');
 }
+
+// ══════════════════════════════════════════════════════════════
+//  PAINEL DE ATIVIDADES
+// ══════════════════════════════════════════════════════════════
+
+var AT_DATA       = [];   // array of analysis objects
+var AT_FILTER     = 'all';
+var AT_SEL_TYPE   = '';
+var AT_SEL_ENTITY = '';
+var AT_SEL_CHIPS  = new Set();
+var AT_ITEM_STATE = {};
+var AT_DROP_FOCUS = -1;
+
+const AT_ENTITIES = {
+  Canal:      ['Booking.com','Expedia','Airbnb','Hotels.com','Trip.com','Agoda','Despegar','CVC','Decolar','Hotel Urbano','Hurb','Submarino Viagens','Almundo','Reservamos'],
+  Operadora:  ['CVC Corp','Flytour','Abreu','Visual','Mundo','Ancoradouro','Queensberry','Schultz','TurismoCity','Viajar','Club Med','Sol Rio','Nascimento','Nautilus'],
+  Hotel:      ['Windsor Marapendi','Vila Galé Fortaleza','Transamerica Prime','Blue Tree Premium','Copacabana Palace','Fasano SP','Grand Hyatt SP','Sofitel Salvador','Wish Serrano','Mabu Thermas','Palácio Tangará','Emiliano SP','Bourbon Curitiba','Rafain Palace','Pestana Rio'],
+  OTA:        ['Booking.com','Expedia','TripAdvisor','Airbnb','Hotels.com','Kayak','Trivago','Google Hotel Ads','Momondo','Priceline','Orbitz','Travelocity','eDreams','LastMinute'],
+  Corporativo:['BCD Travel','CWT (Carlson Wagonlit)','American Express GBT','FCM Travel','CI&T Business','TravelPerk','Egencia','Navan (TripActions)','Concur Travel','Serko']
+};
+
+const AT_STATUS_COLORS = {
+  'Pendente':'#b45309','Em revisão':'#1d4ed8','Concluída':'#15803d','Escalada':'#c0173a'
+};
+
+const AT_TYPE_COLORS = {
+  Canal:'#1d4ed8', Operadora:'#0f766e', Hotel:'#5c1085', OTA:'#c0173a', Corporativo:'#b45309'
+};
+
+const AT_TPL_LABELS = {
+  triagem:'🔍 Triagem', paridade:'⚖️ Paridade', conteudo:'📸 Conteúdo', plano:'🎯 Plano Ação'
+};
+
+const AT_ITEMS = {
+  triagem:  [{t:'Verificar dados de entrada no sistema',p:'h'},{t:'Validar consistência das métricas',p:'h'},{t:'Checar integrações ativas',p:'m'},{t:'Confirmar período da análise',p:'l'}],
+  paridade: [{t:'Comparar tarifas entre canais',p:'h'},{t:'Identificar canais fora de paridade',p:'h'},{t:'Verificar condições de oferta',p:'m'},{t:'Registrar desvio encontrado',p:'m'}],
+  conteudo: [{t:'Revisar fotos e descrições',p:'m'},{t:'Checar políticas publicadas',p:'m'},{t:'Validar amenidades listadas',p:'l'},{t:'Confirmar comodidades corretas',p:'l'}],
+  plano:    [{t:'Definir ação corretiva',p:'h'},{t:'Atribuir responsável',p:'h'},{t:'Estabelecer prazo',p:'m'},{t:'Documentar impacto esperado',p:'l'}]
+};
+
+function atIsAdmin() {
+  return UM_CURRENT_USER && (UM_CURRENT_USER.user === 'admin' || UM_CURRENT_USER.level === 'admin');
+}
+
+function atCurrentUser() {
+  return UM_CURRENT_USER ? (UM_CURRENT_USER.name || UM_CURRENT_USER.user) : 'Usuário';
+}
+
+// ── Init ──────────────────────────────────────────────────────
+function atInit() {
+  if (typeof umInit === 'function') umInit();
+  atUpdateKpis();
+  atRenderHistory();
+  atRenderUserPanel();
+}
+
+// ── Modal ─────────────────────────────────────────────────────
+function atOpenModal() {
+  atResetForm();
+  const assignWrap = document.getElementById('atAssignWrap');
+  const sel = document.getElementById('atAssignTo');
+  if (atIsAdmin()) {
+    assignWrap.style.display = 'block';
+    sel.innerHTML = '<option value="">— selecione o analista —</option>';
+    const users = (UM_STORE && UM_STORE.length) ? UM_STORE : USERS.map((u,i)=>({...u,id:'u'+i,level:u.user==='admin'?'admin':'user',active:true}));
+    users.filter(u => u.active !== false).forEach(u => {
+      const opt = document.createElement('option');
+      opt.value = u.name || u.user;
+      opt.textContent = (u.name || u.user) + (u.level === 'admin' ? ' (Admin)' : '');
+      sel.appendChild(opt);
+    });
+  } else {
+    assignWrap.style.display = 'none';
+  }
+  document.getElementById('atModal').classList.add('open');
+}
+
+function atCloseModal() {
+  document.getElementById('atModal').classList.remove('open');
+}
+
+// ── Form helpers ──────────────────────────────────────────────
+function atOnTypeChange() {
+  const v = document.getElementById('atIndType').value;
+  AT_SEL_TYPE = v; AT_SEL_ENTITY = ''; AT_DROP_FOCUS = -1;
+  const wrap = document.getElementById('atEntityWrap');
+  const lbl  = document.getElementById('atEntityLabel');
+  const chip = document.getElementById('atEntityChip');
+  const sw   = document.getElementById('atSearchWrap');
+  wrap.style.display = v ? 'block' : 'none';
+  if (v) {
+    lbl.textContent = 'Selecionar ' + v;
+    chip.classList.remove('show');
+    sw.style.display = 'block';
+    document.getElementById('atSearchInput').value = '';
+    atFilterEntities();
+  }
+}
+
+function atFilterEntities() {
+  const q    = document.getElementById('atSearchInput').value.toLowerCase();
+  const list = AT_ENTITIES[AT_SEL_TYPE] || [];
+  const drop = document.getElementById('atSearchDrop');
+  AT_DROP_FOCUS = -1;
+  const filtered = list.filter(e => e.toLowerCase().includes(q));
+  drop.innerHTML = filtered.length
+    ? filtered.map(e => `<div class="at-search-option" onmousedown="atSelectEntity('${e.replace(/'/g,"\\'")}')"> ${e} </div>`).join('')
+    : `<div class="at-search-empty">Nenhum resultado para "${q}"</div>`;
+  drop.classList.add('open');
+}
+
+function atOpenDrop() { atFilterEntities(); }
+
+function atNavDrop(e) {
+  const drop = document.getElementById('atSearchDrop');
+  const opts = drop.querySelectorAll('.at-search-option');
+  if (e.key === 'ArrowDown') AT_DROP_FOCUS = Math.min(AT_DROP_FOCUS+1, opts.length-1);
+  else if (e.key === 'ArrowUp') AT_DROP_FOCUS = Math.max(AT_DROP_FOCUS-1, 0);
+  else if (e.key === 'Enter' && AT_DROP_FOCUS >= 0) { opts[AT_DROP_FOCUS].dispatchEvent(new MouseEvent('mousedown')); return; }
+  else if (e.key === 'Escape') { drop.classList.remove('open'); return; }
+  opts.forEach((o,i) => o.classList.toggle('focused', i === AT_DROP_FOCUS));
+  if (opts[AT_DROP_FOCUS]) opts[AT_DROP_FOCUS].scrollIntoView({block:'nearest'});
+}
+
+function atSelectEntity(name) {
+  AT_SEL_ENTITY = name;
+  document.getElementById('atSearchInput').value = '';
+  document.getElementById('atSearchDrop').classList.remove('open');
+  document.getElementById('atEntityChipName').textContent = name;
+  document.getElementById('atEntityChip').classList.add('show');
+  document.getElementById('atSearchWrap').style.display = 'none';
+}
+
+function atClearEntity() {
+  AT_SEL_ENTITY = '';
+  document.getElementById('atEntityChip').classList.remove('show');
+  document.getElementById('atSearchWrap').style.display = 'block';
+  document.getElementById('atSearchInput').value = '';
+  atFilterEntities();
+}
+
+document.addEventListener('click', function(e) {
+  const sw = document.getElementById('atSearchWrap');
+  if (sw && !sw.contains(e.target)) {
+    const d = document.getElementById('atSearchDrop');
+    if (d) d.classList.remove('open');
+  }
+});
+
+function atToggleChip(el, tid) {
+  el.classList.toggle('on');
+  if (AT_SEL_CHIPS.has(tid)) AT_SEL_CHIPS.delete(tid);
+  else AT_SEL_CHIPS.add(tid);
+  atRenderDynItems();
+}
+
+function atRenderDynItems() {
+  const wrap = document.getElementById('atDynItems');
+  const list = document.getElementById('atDynList');
+  if (!AT_SEL_CHIPS.size) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  list.innerHTML = '';
+  AT_ITEM_STATE = {};
+  AT_SEL_CHIPS.forEach(tid => {
+    const items = AT_ITEMS[tid] || [];
+    AT_ITEM_STATE[tid] = new Array(items.length).fill(false);
+    items.forEach((item, ii) => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;transition:background .12s';
+      const box = document.createElement('div'); box.className = 'at-box';
+      const txt = document.createElement('div');
+      txt.style.cssText = 'font-size:11px;flex:1;line-height:1.4';
+      txt.textContent = item.t;
+      const badge = document.createElement('span');
+      badge.className = 'pri pri-' + item.p;
+      badge.textContent = {h:'ALTA',m:'MÉDIA',l:'BAIXA'}[item.p];
+      row.onclick = () => { AT_ITEM_STATE[tid][ii] = !AT_ITEM_STATE[tid][ii]; box.classList.toggle('on', AT_ITEM_STATE[tid][ii]); };
+      row.append(box, txt, badge);
+      list.appendChild(row);
+    });
+  });
+}
+
+function atResetForm() {
+  ['atIndType','atStatusSel'].forEach(id => { const el=document.getElementById(id); if(el) el.value=id==='atStatusSel'?'Pendente':''; });
+  const ta = document.getElementById('atSummary'); if(ta) ta.value='';
+  const ew = document.getElementById('atEntityWrap'); if(ew) ew.style.display='none';
+  const ec = document.getElementById('atEntityChip'); if(ec) ec.classList.remove('show');
+  const si = document.getElementById('atSearchInput'); if(si) si.value='';
+  const sd = document.getElementById('atSearchDrop'); if(sd) sd.classList.remove('open');
+  const di = document.getElementById('atDynItems'); if(di) di.style.display='none';
+  const dl = document.getElementById('atDynList'); if(dl) dl.innerHTML='';
+  AT_SEL_TYPE=''; AT_SEL_ENTITY=''; AT_SEL_CHIPS=new Set(); AT_ITEM_STATE={};
+  document.querySelectorAll('.at-type-chip').forEach(c => c.classList.remove('on'));
+}
+
+// ── Submit ────────────────────────────────────────────────────
+function atSubmit() {
+  const type    = document.getElementById('atIndType').value;
+  const summary = (document.getElementById('atSummary').value || '').trim();
+  const status  = document.getElementById('atStatusSel').value;
+  const assignEl= document.getElementById('atAssignTo');
+  const assignedTo = atIsAdmin() && assignEl && assignEl.value ? assignEl.value : atCurrentUser();
+
+  if (!type)        { alert('Selecione o tipo de indicador.'); return; }
+  if (!AT_SEL_ENTITY){ alert('Selecione a entidade a ser analisada.'); return; }
+  if (!summary)     { alert('Escreva um resumo da análise.'); return; }
+
+  const checkedItems = [];
+  AT_SEL_CHIPS.forEach(tid => {
+    (AT_ITEMS[tid]||[]).forEach((item,ii) => {
+      checkedItems.push({ text: item.t, done: AT_ITEM_STATE[tid]?.[ii] || false });
+    });
+  });
+
+  const now = new Date();
+  AT_DATA.unshift({
+    id:         Date.now(),
+    type,
+    entity:     AT_SEL_ENTITY,
+    templates:  [...AT_SEL_CHIPS],
+    items:      checkedItems,
+    summary,
+    status,
+    user:       atCurrentUser(),
+    assignedTo,
+    ts:         now.toLocaleString('pt-BR'),
+    validated:  null,
+    rejected:   false,
+  });
+
+  atCloseModal();
+  atUpdateKpis();
+  atRenderHistory();
+  atRenderUserPanel();
+
+  setTimeout(() => {
+    const first = document.querySelector('.at-item');
+    if (first) first.classList.add('new-flash');
+  }, 100);
+}
+
+// ── KPIs ──────────────────────────────────────────────────────
+function atUpdateKpis() {
+  const me   = atCurrentUser();
+  const mine = atIsAdmin() ? AT_DATA : AT_DATA.filter(a => a.assignedTo === me || a.user === me);
+  document.getElementById('atKpiTotal').textContent = mine.length;
+  document.getElementById('atKpiPend').textContent  = mine.filter(a=>a.status==='Pendente').length;
+  document.getElementById('atKpiRev').textContent   = mine.filter(a=>a.status==='Em revisão').length;
+  document.getElementById('atKpiDone').textContent  = mine.filter(a=>a.status==='Concluída').length;
+  document.getElementById('atKpiEsc').textContent   = mine.filter(a=>a.status==='Escalada').length;
+  const badge = document.getElementById('at-tab-count');
+  if (badge) badge.textContent = mine.length;
+}
+
+// ── User panel ────────────────────────────────────────────────
+function atRenderUserPanel() {
+  const grid = document.getElementById('atUsersGrid');
+  const sub  = document.getElementById('atUsersPanelSub');
+  if (!grid) return;
+  const isAdmin = atIsAdmin();
+  const me = atCurrentUser();
+  const users = (UM_STORE && UM_STORE.length)
+    ? UM_STORE.filter(u => u.active !== false)
+    : USERS.map((u,i) => ({...u, id:'u'+i, level: u.user==='admin'?'admin':'user', active:true}));
+
+  const visible = isAdmin ? users : users.filter(u => (u.name||u.user) === me);
+  sub.textContent = isAdmin ? 'visão consolidada · Admin' : 'suas análises';
+
+  if (!visible.length) {
+    grid.innerHTML = '<div style="padding:14px;text-align:center;font-size:11px;color:var(--ink3);font-family:var(--font-mono)">Nenhum usuário encontrado.</div>';
+    return;
+  }
+
+  grid.innerHTML = visible.map(u => {
+    const uname = u.name || u.user;
+    const udata = AT_DATA.filter(a => a.assignedTo === uname || a.user === uname);
+    const pend  = udata.filter(a=>a.status==='Pendente').length;
+    const rev   = udata.filter(a=>a.status==='Em revisão').length;
+    const done  = udata.filter(a=>a.status==='Concluída').length;
+    const esc   = udata.filter(a=>a.status==='Escalada').length;
+    const init  = uname.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const avcls = (u.level==='admin'||u.user==='admin') ? 'av-admin' : 'av-user';
+    return `<div class="at-user-card">
+      <div class="at-user-card-top">
+        <div class="at-uav ${avcls}">${init}</div>
+        <div>
+          <div class="at-user-name">${uname}</div>
+          <div class="at-user-role">${u.role || (u.level==='admin'?'Administrador':'Analista')}</div>
+        </div>
+      </div>
+      <div class="at-user-stats">
+        <div class="at-ustat s-pend"><div class="at-ustat-num">${pend}</div><div class="at-ustat-lbl">Pend.</div></div>
+        <div class="at-ustat s-rev" ><div class="at-ustat-num">${rev}</div><div class="at-ustat-lbl">Revisão</div></div>
+        <div class="at-ustat s-done"><div class="at-ustat-num">${done}</div><div class="at-ustat-lbl">Concl.</div></div>
+        <div class="at-ustat s-esc" ><div class="at-ustat-num">${esc}</div><div class="at-ustat-lbl">Escal.</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Filter + History ──────────────────────────────────────────
+function atFilter(filter, el) {
+  AT_FILTER = filter;
+  document.querySelectorAll('.at-hf-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.at-kpi').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add(el.classList.contains('at-hf-btn') ? 'on' : 'active');
+  atRenderHistory();
+}
+
+function atRenderHistory() {
+  const body = document.getElementById('atHistoryBody');
+  if (!body) return;
+  const me = atCurrentUser();
+  let filtered = atIsAdmin() ? AT_DATA : AT_DATA.filter(a => a.assignedTo === me || a.user === me);
+  if (AT_FILTER !== 'all') filtered = filtered.filter(a => a.status === AT_FILTER);
+
+  if (!filtered.length) {
+    body.innerHTML = '<div class="at-history-empty">📋 Nenhuma análise encontrada.<br>Clique em <strong>+ Nova Análise</strong> para começar.</div>';
+    return;
+  }
+
+  const isAdmin = atIsAdmin();
+  body.innerHTML = '<div class="at-history-list">' + filtered.map(a => {
+    const color  = AT_TYPE_COLORS[a.type] || 'var(--ob-purple)';
+    const scol   = AT_STATUS_COLORS[a.status] || 'var(--ink3)';
+    const doneN  = (a.items||[]).filter(i=>i.done).length;
+    const totalN = (a.items||[]).length;
+    const tpls   = (a.templates||[]).map(t => AT_TPL_LABELS[t]
+      ? `<span style="font-size:9px;background:var(--surface3);color:var(--ink3);padding:1px 6px;border-radius:3px;font-family:var(--font-mono)">${AT_TPL_LABELS[t]}</span>`
+      : '').join('');
+
+    // status badge/actions
+    let actionsHtml = '';
+    if (a.validated) {
+      actionsHtml = `<span class="at-validated-badge">✓ Validado por ${a.validated}</span>`;
+    } else if (a.rejected) {
+      actionsHtml = `<span class="at-rejected-badge">↩ Devolvida para revisão</span>`;
+    } else if (isAdmin) {
+      actionsHtml = `<button class="at-validate-btn" onclick="atValidate(${a.id},event)">✓ Validar</button>
+                     <button class="at-reject-btn"   onclick="atReject(${a.id},event)">↩ Devolver</button>`;
+    }
+
+    const diffUser = a.assignedTo && a.assignedTo !== a.user;
+    return `<div class="at-item" id="atItem${a.id}">
+      <div class="at-item-top" onclick="atToggleItem(this.parentElement)">
+        <div class="at-type-badge" style="background:${color}18;color:${color};border:1px solid ${color}40">${a.type}</div>
+        <div class="at-info">
+          <div class="at-item-title">${a.entity}</div>
+          <div class="at-item-entity">${tpls||'<span style="font-size:9px;color:var(--ink3);font-family:var(--font-mono)">sem template</span>'}</div>
+          <div class="at-item-meta">
+            <div class="at-meta-item">✍️ <span class="at-user-lbl">${a.user}</span></div>
+            ${diffUser ? `<div class="at-meta-item">→ <span class="at-assign-lbl">${a.assignedTo}</span></div>` : ''}
+            <div class="at-meta-item">🕐 ${a.ts}</div>
+            <div class="at-meta-item"><div class="at-status-dot" style="background:${scol}"></div><span style="color:${scol};font-weight:700">${a.status}</span></div>
+            ${totalN>0 ? `<div class="at-meta-item">✅ ${doneN}/${totalN} itens</div>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="at-item-detail">
+        <div class="at-summary-box">${a.summary}</div>
+        ${(a.items||[]).length ? `<div class="at-checks">${(a.items||[]).slice(0,8).map(i=>`<span class="at-check-tag ${i.done?'done':'skip'}">${i.done?'✓':'○'} ${i.text.length>40?i.text.slice(0,40)+'…':i.text}</span>`).join('')}</div>` : ''}
+        ${actionsHtml ? `<div class="at-actions">${actionsHtml}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function atToggleItem(el) {
+  const was = el.classList.contains('expanded');
+  document.querySelectorAll('.at-item.expanded').forEach(e => e.classList.remove('expanded'));
+  if (!was) el.classList.add('expanded');
+}
+
+// ── Admin actions ─────────────────────────────────────────────
+function atValidate(id, e) {
+  e.stopPropagation();
+  const a = AT_DATA.find(x => x.id === id);
+  if (!a) return;
+  a.status    = 'Concluída';
+  a.validated = atCurrentUser();
+  a.rejected  = false;
+  atUpdateKpis(); atRenderHistory(); atRenderUserPanel();
+}
+
+function atReject(id, e) {
+  e.stopPropagation();
+  const a = AT_DATA.find(x => x.id === id);
+  if (!a) return;
+  a.status    = 'Pendente';
+  a.rejected  = true;
+  a.validated = null;
+  atUpdateKpis(); atRenderHistory(); atRenderUserPanel();
+}
+
 </script>
 
 </div><!-- /app-shell -->
